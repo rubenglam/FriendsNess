@@ -1,1 +1,3 @@
 # FriendsNess
+
+<!-- soy gay -->
