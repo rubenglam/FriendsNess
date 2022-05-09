@@ -1,0 +1,17 @@
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNessApi.Core\obj\Debug\net6.0\FriendsNess.Core.csproj.AssemblyReference.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNessApi.Core\obj\Debug\net6.0\FriendsNess.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNessApi.Core\obj\Debug\net6.0\FriendsNess.Core.AssemblyInfoInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNessApi.Core\obj\Debug\net6.0\FriendsNess.Core.AssemblyInfo.cs
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNessApi.Core\obj\Debug\net6.0\FriendsNess.Core.csproj.CoreCompileInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.csproj.AssemblyReference.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.AssemblyInfoInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.AssemblyInfo.cs
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.csproj.CoreCompileInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\bin\Debug\net6.0\FriendsNess.Core.deps.json
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\bin\Debug\net6.0\FriendsNess.Core.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\bin\Debug\net6.0\FriendsNess.Core.pdb
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\refint\FriendsNess.Core.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\FriendsNess.Core.pdb
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNessAngular\api\FriendsNess.Core\obj\Debug\net6.0\ref\FriendsNess.Core.dll

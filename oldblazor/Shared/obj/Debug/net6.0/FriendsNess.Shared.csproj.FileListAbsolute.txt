@@ -1,0 +1,12 @@
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\bin\Debug\net6.0\FriendsNess.Shared.deps.json
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\bin\Debug\net6.0\FriendsNess.Shared.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\bin\Debug\net6.0\FriendsNess.Shared.pdb
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.csproj.AssemblyReference.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.AssemblyInfoInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.AssemblyInfo.cs
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.csproj.CoreCompileInputs.cache
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\refint\FriendsNess.Shared.dll
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\FriendsNess.Shared.pdb
+C:\Users\ruben\Documents\Git\FriendsNess\FriendsNess\Shared\obj\Debug\net6.0\ref\FriendsNess.Shared.dll

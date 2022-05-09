@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendsNessApi", "Server\FriendsNessApi.csproj", "{0922FF9C-7429-4E8E-867D-AAC316BDD2D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendsNess.Shared", "Shared\FriendsNess.Shared.csproj", "{9364BE86-1F1C-47BD-8AC1-9D8AF2CBEE15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0922FF9C-7429-4E8E-867D-AAC316BDD2D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0922FF9C-7429-4E8E-867D-AAC316BDD2D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0922FF9C-7429-4E8E-867D-AAC316BDD2D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0922FF9C-7429-4E8E-867D-AAC316BDD2D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9364BE86-1F1C-47BD-8AC1-9D8AF2CBEE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9364BE86-1F1C-47BD-8AC1-9D8AF2CBEE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9364BE86-1F1C-47BD-8AC1-9D8AF2CBEE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9364BE86-1F1C-47BD-8AC1-9D8AF2CBEE15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C2231A0-E7E3-4CC5-8492-B2345FFEEB00}
+	EndGlobalSection
+EndGlobal
