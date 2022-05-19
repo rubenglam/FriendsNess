@@ -12,7 +12,7 @@ import { ExerciceCardItemComponent } from './components/card-item/exercice-card-
     ExercicesIndexPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class ExercicesModule {}
