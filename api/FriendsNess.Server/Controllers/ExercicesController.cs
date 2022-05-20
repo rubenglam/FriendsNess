@@ -1,28 +1,31 @@
-using FriendsNess.Server.Services.Repositories;
-using FriendsNess.Core;
 using FriendsNess.Core.Domain.Exercices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using FriendsNess.Core.Repositories;
+using FriendsNess.Services;
 
 namespace FriendsNess.Server.Controllers;
 
-[AllowAnonymous]
 public class ExercicesController : RootController
 {
-    public ExercicesController(IUnitOfRepositories unitOfRepositories, ILogger<ExercicesController> logger) : base(unitOfRepositories, logger)
+    private readonly ExercicesService _exercicesService;
+
+    public ExercicesController(ExercicesService exercicesService, ILogger<ExercicesController> logger) : base(logger)
     {
+        _exercicesService = exercicesService;
     }
 
     [HttpGet]
-    public ActionResult<List<Exercice>> GetExercices()
+    public async Task<ActionResult<List<Exercice>>> GetExercices()
     {
-        return Ok(UnitOfRepositories.ExercicesRepository.FindAll().ToList());
+        var exercices = await _exercicesService.GetAllExercices();
+        return Ok(exercices.ToList());
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Exercice> GetExercice(int id)
+    public async Task<ActionResult<Exercice>> GetExercice(int id)
     {
-        var exercice = UnitOfRepositories.ExercicesRepository.FindByCondition(x => x.Id == id).First();
+        var exercice = await _exercicesService.GetExerciceById(id);
         if (exercice == null)
         {
             return NotFound();
@@ -33,8 +36,7 @@ public class ExercicesController : RootController
     [HttpPost]
     public async Task<ActionResult<Exercice>> PostExercice(Exercice exercice)
     {
-        UnitOfRepositories.ExercicesRepository.Create(exercice);
-        await UnitOfRepositories.SaveAsync();
+        await _exercicesService.CreateExercice(exercice);
         return Ok(exercice);
     }
 
@@ -46,15 +48,15 @@ public class ExercicesController : RootController
             return BadRequest();
         }
 
-        UnitOfRepositories.ExercicesRepository.Update(exercice);
+        var dbExercice = await _exercicesService.GetExerciceById(id);
 
         try
         {
-            await UnitOfRepositories.SaveAsync();
+            await _exercicesService.UpdateExercice(dbExercice, exercice);
         }
         catch (Exception ex)
         {
-            if (!ExerciceExists(id))
+            if (! (await ExerciceExists(id)))
             {
                 return NotFound();
             }
@@ -69,19 +71,18 @@ public class ExercicesController : RootController
     [HttpDelete("id")]
     public async Task<ActionResult<Exercice>> DeleteExercice(int id)
     {
-        var exercice = UnitOfRepositories.ExercicesRepository.FindByCondition(x => x.Id == id).First();
+        var exercice = await _exercicesService.GetExerciceById(id);
         if (exercice == null)
         {
             return NotFound();
         }
 
-        UnitOfRepositories.ExercicesRepository.Delete(exercice);
-        await UnitOfRepositories.SaveAsync();
+        await _exercicesService.DeleteExercice(exercice);
         return exercice;
     }
 
-    private bool ExerciceExists(int id)
+    private async Task<bool> ExerciceExists(int id)
     {
-        return UnitOfRepositories.ExercicesRepository.FindByCondition(x => x.Id == id).Any();
+        return (await _exercicesService.GetExerciceById(id)) != null;
     }
 }

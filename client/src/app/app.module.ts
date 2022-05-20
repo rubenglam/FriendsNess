@@ -8,27 +8,23 @@ import { ExercicesModule } from './modules/exercices/exercices.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HomeIndexPageComponent } from './modules/home/pages/home-index-page/home-index-page.component';
-// import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './modules/auth/pages/register/register.component';
-
+import { HomeModule } from './modules/home/home.module';
+import { CookieService } from 'ngx-cookie-service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeIndexPageComponent,
-    // LoginComponent,
-    RegisterComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ExercicesModule,
+    HomeModule,
+    SharedModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CookieService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

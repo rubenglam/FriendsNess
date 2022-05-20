@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ExercicesService } from '../../../../core/http/exercices.service';
-import { Exercice, ExerciceBodyPart, ExerciceCategory } from '../../../../core/models/exercices/exercice.model';
+import { Exercice, ExerciceBodyPart, ExerciceCategory } from '../../../../models/exercices/exercice.model';
 import { Observable } from 'rxjs';
+import { ExercicesService } from '../../services/exercices.service';
 
 @Component({
   selector: 'app-exercices-index-page',

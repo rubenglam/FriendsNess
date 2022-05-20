@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ExerciceCategory } from '../../../../core/models/exercices/exercice.model';
+import { ExerciceCategory } from '../../../../models/exercices/exercice.model';
 import {
   Exercice,
   ExerciceBodyPart,
-} from '../../../../core/models/exercices/exercice.model';
+} from '../../../../models/exercices/exercice.model';
 
 @Component({
   selector: 'app-exercice-card-item',

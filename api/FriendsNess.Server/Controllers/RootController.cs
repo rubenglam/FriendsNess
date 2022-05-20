@@ -1,4 +1,4 @@
-﻿using FriendsNess.Server.Services.Repositories;
+﻿using FriendsNess.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FriendsNess.Server.Controllers
@@ -7,18 +7,11 @@ namespace FriendsNess.Server.Controllers
     [Route("api/[controller]")]
     public abstract class RootController : ControllerBase
     {
-        private readonly IUnitOfRepositories _unitOfRepositories;
         private readonly ILogger _logger;
         
-        public RootController(IUnitOfRepositories unitOfRepositories, ILogger logger)
+        public RootController(ILogger logger)
         {
-            _unitOfRepositories = unitOfRepositories;
             _logger = logger;
-        }
-
-        protected IUnitOfRepositories UnitOfRepositories
-        {
-            get => _unitOfRepositories;
         }
 
         protected ILogger Logger

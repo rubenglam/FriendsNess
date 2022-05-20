@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Domain.Users
+namespace FriendsNess.Core.Domain.Users;
+
+public class ApplicationRole : IdentityRole<int>
 {
-    public class ApplicationRole : IdentityRole<int>
-    {
-    }
 }

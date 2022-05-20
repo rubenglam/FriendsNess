@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendsNess.Server", "Frien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendsNess.Core", "FriendsNess.Core\FriendsNess.Core.csproj", "{36AA5D18-8D6C-493B-A9F3-33EE6766320F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendsNess.Data", "FriendsNess.Data\FriendsNess.Data.csproj", "{3E9A85B0-42A7-40DC-9B9D-3AD68FFFC513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendsNess.Services", "FriendsNess.Services\FriendsNess.Services.csproj", "{B09FCAEA-EC58-44D0-BE18-BA412B6B2290}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{36AA5D18-8D6C-493B-A9F3-33EE6766320F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36AA5D18-8D6C-493B-A9F3-33EE6766320F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36AA5D18-8D6C-493B-A9F3-33EE6766320F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E9A85B0-42A7-40DC-9B9D-3AD68FFFC513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E9A85B0-42A7-40DC-9B9D-3AD68FFFC513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E9A85B0-42A7-40DC-9B9D-3AD68FFFC513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E9A85B0-42A7-40DC-9B9D-3AD68FFFC513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09FCAEA-EC58-44D0-BE18-BA412B6B2290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09FCAEA-EC58-44D0-BE18-BA412B6B2290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09FCAEA-EC58-44D0-BE18-BA412B6B2290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09FCAEA-EC58-44D0-BE18-BA412B6B2290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
