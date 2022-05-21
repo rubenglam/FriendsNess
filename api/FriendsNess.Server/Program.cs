@@ -4,6 +4,7 @@ using FriendsNess.Core.Repositories;
 using FriendsNess.Data;
 using FriendsNess.Data.Repositories;
 using FriendsNess.Server.Extensions;
+using FriendsNess.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -34,6 +35,8 @@ builder.Services.AddControllers();
 
 // Añadir servicios
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ExercicesService>();
+builder.Services.AddScoped<UserExercicesService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

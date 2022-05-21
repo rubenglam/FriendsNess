@@ -13,8 +13,8 @@ import { AuthService } from './services/auth.service';
   exports: [
   ],
   imports: [
+    FormsModule,
     CommonModule,
-    FormsModule
   ],
   providers: [
     AuthService
