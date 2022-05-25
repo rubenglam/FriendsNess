@@ -1,1 +1,12 @@
-<app-login-home></app-login-home>
+<div class="container" *ngIf="userEmail !== undefined; else logged">
+  <h1 class="text-center mt-16 text-4xl">Welcome {{ userEmail }}!</h1>
+  <div class="card">
+    <div class="card-title">My Exercices</div>
+    <div class="card body">
+      <p>No exercices added</p>
+    </div>
+  </div>
+</div>
+<ng-template #logged>
+  <h4 class="text-center mt-16 text-4xl">Login please :D</h4>
+</ng-template>

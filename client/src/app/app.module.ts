@@ -11,7 +11,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeModule } from './modules/home/home.module';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from './shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,8 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    AuthModule
   ],
+  exports: [],
   providers: [CookieService],
   bootstrap: [AppComponent],
 })

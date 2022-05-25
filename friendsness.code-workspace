@@ -2,13 +2,6 @@
 	"folders": [
 		{
 			"path": "client"
-		},
-		{
-			"path": "api\\FriendsNess.Core"
-		},
-		{
-			"path": "api\\FriendsNess.Server"
 		}
-	],
-	"settings": {}
+	]
 }

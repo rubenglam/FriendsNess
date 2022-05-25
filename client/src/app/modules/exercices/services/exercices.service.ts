@@ -9,20 +9,11 @@ import { environment } from '../../../../environments/environment';
 })
 export class ExercicesService {
   private _baseUrl = environment.baseUrl;
-  private _exercices!: Exercice[];
 
   constructor(private httpClient: HttpClient) {}
 
   getExercices(): Observable<Exercice[]> {
     const url = `${this._baseUrl}/Exercices`;
-    return this.httpClient.get<Exercice[]>(url).pipe(
-      tap((response) => {
-        this._exercices = response;
-      })
-    );
-  }
-
-  get exercices() : Exercice[] {
-    return { ...this.exercices };
+    return this.httpClient.get<Exercice[]>(url);
   }
 }

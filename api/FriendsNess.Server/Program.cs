@@ -45,6 +45,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 builder.Services.AddAuth(jwtSettings);
 
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 builder.Services.AddHttpContextAccessor();
 
 // Configurar política de seguridad para acceder a FriendsNess

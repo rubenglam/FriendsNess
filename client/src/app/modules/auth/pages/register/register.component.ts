@@ -2,35 +2,32 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RegisterRequest } from '../../models/register-request.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
-  @Input() name: string;
+export class RegisterComponent {
+  registerForm: FormGroup = this.formBuilder.group({
+    userName: [''],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(4)]],
+  });
+  registerRequest = new RegisterRequest();
 
-  setValue() {
-    this.name = 'Nancy';
-  }
-
-
-  // @Input() public registerRequest = new RegisterRequest();
-  // email: string = "Example";
-
-  constructor(private router: Router, private authService: AuthService) { }
-
-  ngOnInit(): void {
-
-  }
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   register() {
-    console.log("Hola");
-    // this.authService.register(this.registerRequest).subscribe(response => {
-    //   if (response.success) {
-    //     this.router.navigateByUrl("/login");
-    //   }
-    // });
+    this.authService.register(this.registerRequest).subscribe((success) => {
+      if (success) {
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 }

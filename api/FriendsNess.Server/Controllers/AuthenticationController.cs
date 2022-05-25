@@ -29,7 +29,7 @@ namespace FriendsNess.Server.Controllers
             _jwtSettings = jwtSettings.Value;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
             var user = _mapper.Map<RegisterDto, ApplicationUser>(registerDto);
@@ -50,7 +50,7 @@ namespace FriendsNess.Server.Controllers
             return Problem(result.Errors.First().Description, null, 500);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto signInDto)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == signInDto.Email);
@@ -77,7 +77,13 @@ namespace FriendsNess.Server.Controllers
             return BadRequest("Email or password incorrect.");
         }
 
-        [HttpPost("Roles")]
+        [HttpPost("refreshtoken")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            return Ok();
+        }
+
+        [HttpPost("roles")]
         public async Task<IActionResult> CreateRole(string roleName)
         {
             if (string.IsNullOrWhiteSpace(roleName))
@@ -100,7 +106,7 @@ namespace FriendsNess.Server.Controllers
             return Problem(roleResult.Errors.First().Description, null, 500);
         }
 
-        [HttpPost("User/{userEmail}/Role")]
+        [HttpPost("user/{userEmail}/role")]
         public async Task<IActionResult> AddUserToRole(string userEmail, [FromBody] string roleName)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == userEmail);

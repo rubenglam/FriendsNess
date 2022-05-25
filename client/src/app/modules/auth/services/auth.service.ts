@@ -13,59 +13,56 @@ import { ApplicationUser } from '../../../models/users/application-user.model';
 })
 export class AuthService {
   private _baseUrl = environment.baseUrl;
-  private _user! : ApplicationUser;
+  private _userEmail!: string;
 
   constructor(private httpClient: HttpClient) {}
 
   register(registerRequest: RegisterRequest) {
-    const url = `${this._baseUrl}/Authentication/Register`;
-    return this.httpClient
-      .post<AuthResponse>(url, registerRequest)
-      .pipe(
-        tap(response => {
-          if (response.success) {
-            localStorage.setItem('token', response.token!);
-          }
-        }),
-        map(response => response.success),
-        catchError((responseError) => of(responseError.error.msg))
-      );
+    const url = `${this._baseUrl}/authentication/register`;
+    return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
+      tap((response) => {
+        if (response.success) {
+          localStorage.setItem('token', response.token!);
+        }
+      }),
+      map((response) => response.success),
+      catchError((responseError) => of(responseError.error))
+    );
   }
 
   login(signInRequest: LoginRequest) {
-    const url = `${this._baseUrl}/Authentication/Login`;
-    return this.httpClient
-      .post<AuthResponse>(url, signInRequest)
-      .pipe(
-        tap((response) => {
-          if (response.success) {
-            localStorage.setItem('token', response.token!);
-          }
-        }),
-        map((response) => response.success),
-        catchError((responseError) => of(responseError.error.msg))
-      );
+    const url = `${this._baseUrl}/authentication/login`;
+    return this.httpClient.post<AuthResponse>(url, signInRequest).pipe(
+      tap((response) => {
+        if (response.success) {
+          localStorage.setItem('token', response.token!);
+          this._userEmail = response.email;
+        }
+      }),
+      map((response) => response.success),
+      catchError((responseError) => of(responseError.error))
+    );
   }
 
   refreshToken(): Observable<boolean> {
-    const url = `${this._baseUrl}/auth/refreshToken`;
+    const url = `${this._baseUrl}/authentication/refreshtoken`;
     const headers = new HttpHeaders().set(
-      'x-token',
+      'auth-token',
       localStorage.getItem('token') || ''
     );
 
     return this.httpClient.get<AuthResponse>(url, { headers }).pipe(
-      map(response => {
+      map((response) => {
         localStorage.setItem('token', response.token!);
-        this._user = {
-          email: response.email!,
-          id: response.userId!,
-          userExercices: [],
-          userName: response.userName!
-        };
+        // this._user = {
+        //   email: response.email!,
+        //   id: response.userId!,
+        //   userExercices: [],
+        //   userName: response.userName!
+        // };
         return response.success;
       }),
-      catchError((erorr) => of(false))
+      catchError((responseError) => of(false))
     );
   }
 
@@ -73,7 +70,7 @@ export class AuthService {
     localStorage.clear();
   }
 
-  get user() : ApplicationUser {
-    return { ...this._user };
+  get userEmail(): string {
+    return this._userEmail;
   }
 }

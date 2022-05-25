@@ -1,46 +1,44 @@
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold">Login now!</h1>
-      <p class="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-        excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-        id nisi.
-      </p>
-    </div>
-    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div class="card-body">
-        <form>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Email</span>
-            </label>
-            <input
-              type="text"
-              placeholder="email"
-              class="input input-bordered"
-            />
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Password</span>
-            </label>
-            <input
-              type="text"
-              placeholder="password"
-              class="input input-bordered"
-            />
-            <label class="label">
-              <a href="#" class="label-text-alt link link-hover"
-                >Forgot password?</a
-              >
-            </label>
-          </div>
-          <div class="form-control mt-6">
-            <button class="btn btn-primary">Login</button>
-          </div>
-        </form>
+<div class="flex justify-center items-center my-20">
+  <div
+    class="card flex-auto flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100"
+  >
+    <div class="card-body">
+      <div class="alert alert-error shadow-lg my-4" *ngIf="errorMessage !== undefined">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>{{ errorMessage }}</span>
+        </div>
       </div>
+      <h1 class="text-4xl font-bold text-center">Login</h1>
+      <form class="my-4" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">User Name</span>
+          </label>
+          <input
+            type="text"
+            placeholder="username"
+            class="input input-bordered"
+            name="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="form-control mt-2">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            name="password"
+            formControlName="password"
+          />
+        </div>
+        <div class="form-control mt-8">
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -6,15 +6,21 @@ import { LoginComponent } from './modules/auth/pages/login/login.component';
 import { RegisterComponent } from './modules/auth/pages/register/register.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeIndexPageComponent, pathMatch: 'full' },
+  { path: '', component: HomeIndexPageComponent, pathMatch: 'full' },
+  { path: 'home', pathMatch: 'full', redirectTo: '' },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((module) => module.AuthModule),
+  },
   {
     path: 'exercices',
-    component: ExercicesIndexPageComponent,
-    pathMatch: 'full',
+    loadChildren: () =>
+      import('./modules/exercices/exercices.module').then(
+        (module) => module.ExercicesModule
+      ),
   },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

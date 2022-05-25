@@ -1,43 +1,48 @@
-<!-- <form (ngSubmit)="register()"> -->
-<!-- <div class="form-control">
-    <label class="label">
-      <span class="label-text">Email</span>
-    </label>
-    <input
-      type="text"
-      name="email"
-      [(ngModel)]="email"
-    />
+<div class="flex justify-center items-center my-20">
+  <div class="card flex-auto flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+    <div class="card-body">
+      <h1 class="text-4xl font-bold text-center">Register</h1>
+      <form class="my-4" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">User Name</span>
+          </label>
+          <input
+            type="text"
+            placeholder="username"
+            class="input input-bordered"
+            name="userName"
+            formControlName="userName"
+          />
+        </div>
+        <div class="form-control mt-2">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="email"
+            class="input input-bordered"
+            name="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="form-control mt-2">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="password"
+            class="input input-bordered"
+            name="password"
+            formControlName="password"
+          />
+        </div>
+        <div class="form-control mt-8">
+          <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form-control">
-    <label class="label">
-      <span class="label-text">Password</span>
-    </label>
-    <input
-      type="text"
-      name="password"
-    />
-    <label class="label">
-      <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-    </label>
-  </div>
-  <div class="form-control mt-6">
-    <button type="submit" class="btn btn-primary">Register</button>
-  </div> -->
-<!-- </form> -->
-
-<form>
-    <input
-        type="text"
-        placeholder="Nombre"
-        name="nombre"
-        [(ngModel)]="name"
-    />
-    <!-- [value]="nuevo.nombre"
-        (input)="cambiarNombre( $event )" -->
-
-    <button type="submit">
-        Agregar
-    </button>
-
-</form>
+</div>

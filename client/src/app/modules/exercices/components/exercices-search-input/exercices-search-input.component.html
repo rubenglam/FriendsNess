@@ -1,0 +1,12 @@
+<div>
+  <form autocomplete="off">
+    <input
+      type="text"
+      placeholder="Search…"
+      name="value"
+      (ngModelChange)="search()"
+      class="input input-bordered w-96"
+      [(ngModel)]="_value"
+    />
+  </form>
+</div>
