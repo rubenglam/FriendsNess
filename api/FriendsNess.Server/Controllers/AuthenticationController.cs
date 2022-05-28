@@ -30,14 +30,14 @@ namespace FriendsNess.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register(RegisterRequest registerDto)
         {
-            var user = _mapper.Map<RegisterDto, ApplicationUser>(registerDto);
+            var user = _mapper.Map<RegisterRequest, ApplicationUser>(registerDto);
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                return Created(string.Empty, new AuthenticationDto()
+                return Created(string.Empty, new AuthenticationResponse()
                 {
                     Success = true,
                     Token = GenerateJwt(user, roles),
@@ -51,7 +51,7 @@ namespace FriendsNess.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto signInDto)
+        public async Task<IActionResult> Login(LoginRequest signInDto)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == signInDto.Email);
             if (user is null)
@@ -63,7 +63,7 @@ namespace FriendsNess.Server.Controllers
             if (result)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                return Ok(new AuthenticationDto()
+                return Ok(new AuthenticationResponse()
                 {
                     Success = true,
                     Token = GenerateJwt(user, roles),

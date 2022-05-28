@@ -8,7 +8,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<RegisterDto, ApplicationUser>()
+        CreateMap<RegisterRequest, ApplicationUser>()
             .ForMember(u => u.UserName, opt => opt.MapFrom(ur => ur.Email));
     }
 }

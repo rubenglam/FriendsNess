@@ -7,7 +7,8 @@
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0 mr-5">
       <li *ngIf="isLogged"><a class="mr-2" [routerLink]="'/'">Home</a></li>
-      <li *ngIf="!isLogged"><a class="mr-2" [routerLink]="'/exercices'">Exercices</a></li>
+      <li *ngIf="isLogged"><a class="mr-2" [routerLink]="'/exercices'">History</a></li>
+      <li *ngIf="isLogged"><a class="mr-2" [routerLink]="'/exercices'">Exercices</a></li>
       <li *ngIf="isLogged"><a [routerLink]="'/planning'">Planning</a></li>
       <li *ngIf="!isLogged"><a [routerLink]="'/auth/login'">Login</a></li>
       <li *ngIf="!isLogged"><a [routerLink]="'/auth/register'">Register</a></li>

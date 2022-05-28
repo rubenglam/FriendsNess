@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Dtos;
 
-public class PaginationDto
+public class PaginationResponse
 {
-    public PaginationDto(int totalCount, int currentPage, int pageItemsCount)
+    public PaginationResponse(int totalCount, int currentPage, int pageItemsCount)
     {
         TotalCount = totalCount;
         CurrentPage = currentPage;

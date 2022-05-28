@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Dtos.Authentication;
+namespace FriendsNess.Core.Dtos.Users;
 
-public class RegisterDto
+public class UserResponse
 {
-    public string Email { get; set; }
+    public int Id { get; set; }
     public string UserName { get; set; }
+    public string Email { get; set; }
     public string Password { get; set; }
 }

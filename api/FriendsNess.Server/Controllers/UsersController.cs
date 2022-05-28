@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FriendsNess.Core.Repositories;
+using FriendsNess.Core.Dtos.Users;
 
 namespace FriendsNess.Server.Controllers;
 
@@ -10,6 +11,17 @@ public class UsersController : RootController
 {
     public UsersController(ILogger<ExercicesController> logger) : base (logger)
     {
+    }
+
+    public async Task<ActionResult<List<UserResponse>>> GetUsers()
+    {
+        
+    }
+
+    [HttpGet("{userId}")]
+    public async Task<ActionResult<UserResponse>> GetUser(Guid userId)
+    {
+
     }
 
     //[HttpGet]

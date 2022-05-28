@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Dtos.Authentication;
 
-public class LoginDto
+public class LoginRequest
 {
     public string Email { get; set; }
     public string Password { get; set; }

@@ -7,22 +7,22 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { RegisterRequest } from '../models/register-request.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ApplicationUser } from '../../../models/users/application-user.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private _baseUrl = environment.baseUrl;
-  private _userEmail!: string;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
   register(registerRequest: RegisterRequest) {
     const url = `${this._baseUrl}/authentication/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
       tap((response) => {
         if (response.success) {
-          localStorage.setItem('token', response.token!);
+          this.cookieService.set("auth-token", response.token!);
         }
       }),
       map((response) => response.success),
@@ -35,8 +35,7 @@ export class AuthService {
     return this.httpClient.post<AuthResponse>(url, signInRequest).pipe(
       tap((response) => {
         if (response.success) {
-          localStorage.setItem('token', response.token!);
-          this._userEmail = response.email;
+          this.cookieService.set("auth-token", response.token!);
         }
       }),
       map((response) => response.success),
@@ -66,8 +65,13 @@ export class AuthService {
     );
   }
 
+  getUserLogged() {
+    const token = this.cookieService.get("auth-token");
+    this.httpClient.get()
+  }
+
   logout() {
-    localStorage.clear();
+    this.cookieService.delete("auth-token");
   }
 
   get userEmail(): string {

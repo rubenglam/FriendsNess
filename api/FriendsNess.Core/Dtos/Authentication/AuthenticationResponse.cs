@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Dtos.Authentication;
 
-public class AuthenticationDto
+public class AuthenticationResponse
 {
     public bool Success { get; set; }
     public int UserId { get; set; }
