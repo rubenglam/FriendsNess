@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using FriendsNess.Core.Domain.Users;
+using FriendsNess.Core.Dtos;
 using FriendsNess.Core.Dtos.Authentication;
+using FriendsNess.Core.Exceptions;
 using FriendsNess.Core.Models;
 using FriendsNess.Core.Repositories;
+using FriendsNess.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,138 +18,63 @@ namespace FriendsNess.Server.Controllers
 {
     public class AuthenticationController : RootController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IMapper _mapper;
-        private readonly JwtSettings _jwtSettings;
+        private readonly IAuthenticationService _authenticationService;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IMapper mapper,
-            ILogger<AuthenticationController> logger, IOptionsSnapshot<JwtSettings> jwtSettings) : base(logger)
+        public AuthenticationController(IAuthenticationService authenticationService, ILogger<AuthenticationController> logger) : base(logger)
         {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _mapper = mapper;
-            _jwtSettings = jwtSettings.Value;
+            _authenticationService = authenticationService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest registerDto)
+        public async Task<ActionResult<AuthenticationResponse>> Register(RegisterRequest registerRequest)
         {
-            var user = _mapper.Map<RegisterRequest, ApplicationUser>(registerDto);
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if (result.Succeeded)
+            try
             {
-                var roles = await _userManager.GetRolesAsync(user);
-                return Created(string.Empty, new AuthenticationResponse()
-                {
-                    Success = true,
-                    Token = GenerateJwt(user, roles),
-                    Email = user.Email,
-                    Message = "User created",
-                    UserId = user.Id,
-                    UserName = user.UserName
-                });
+                return Success(await _authenticationService.Register(registerRequest));
             }
-            return Problem(result.Errors.First().Description, null, 500);
+            catch (ApiException apiException)
+            {
+                return Error(apiException);
+            }
+            catch (Exception exception)
+            {
+                return Error(exception);
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest signInDto)
+        public async Task<ActionResult<AuthenticationResponse>> Login(LoginRequest loginRequest)
         {
-            var user = _userManager.Users.SingleOrDefault(u => u.UserName == signInDto.Email);
-            if (user is null)
+            try
             {
-                return NotFound("User not found");
+                return Success(await _authenticationService.Login(loginRequest));
             }
-            var result = await _userManager.CheckPasswordAsync(user, signInDto.Password);
-
-            if (result)
+            catch (ApiException apiException)
             {
-                var roles = await _userManager.GetRolesAsync(user);
-                return Ok(new AuthenticationResponse()
-                {
-                    Success = true,
-                    Token = GenerateJwt(user, roles),
-                    Email = user.Email,
-                    Message = "Loging success",
-                    UserId = user.Id,
-                    UserName = user.UserName
-                });
+                return Error(apiException);
             }
-
-            return BadRequest("Email or password incorrect.");
+            catch (Exception exception)
+            {
+                return Error(exception);
+            }
         }
 
         [HttpPost("refreshtoken")]
-        public async Task<IActionResult> RefreshToken()
+        public async Task<ActionResult> RefreshToken()
         {
-            return Ok();
-        }
-
-        [HttpPost("roles")]
-        public async Task<IActionResult> CreateRole(string roleName)
-        {
-            if (string.IsNullOrWhiteSpace(roleName))
+            try
             {
-                return BadRequest("Role name should be provided.");
+                await _authenticationService.RefreshToken();
+                return Success();
             }
-
-            var newRole = new ApplicationRole
+            catch (ApiException apiException)
             {
-                Name = roleName
-            };
-
-            var roleResult = await _roleManager.CreateAsync(newRole);
-
-            if (roleResult.Succeeded)
-            {
-                return Ok();
+                return Error(apiException);
             }
-
-            return Problem(roleResult.Errors.First().Description, null, 500);
-        }
-
-        [HttpPost("user/{userEmail}/role")]
-        public async Task<IActionResult> AddUserToRole(string userEmail, [FromBody] string roleName)
-        {
-            var user = _userManager.Users.SingleOrDefault(u => u.UserName == userEmail);
-
-            var result = await _userManager.AddToRoleAsync(user, roleName);
-
-            if (result.Succeeded)
+            catch (Exception exception)
             {
-                return Ok();
+                return Error(exception);
             }
-
-            return Problem(result.Errors.First().Description, null, 500);
-        }
-
-        private string GenerateJwt(ApplicationUser user, IList<string> roles)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-            };
-
-            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));
-            claims.AddRange(roleClaims);
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_jwtSettings.ExpirationInDays));
-
-            var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
-                audience: _jwtSettings.Issuer,
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

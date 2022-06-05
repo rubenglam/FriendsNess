@@ -14,5 +14,5 @@ public class Exercice : BaseEntity
     public ExerciceCategory Category { get; set; }
     public BodyPart BodyPart { get; set; }
 
-    public ICollection<UserExercice> ExerciceUsers { get; set; }
+    public ICollection<UserExercice> UsersExercices { get; set; }
 }

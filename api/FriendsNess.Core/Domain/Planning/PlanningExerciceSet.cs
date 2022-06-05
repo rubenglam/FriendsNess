@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Domain.Planning
 {
-    public class PlanningExerciceSet
+    public class PlanningExerciceSet : BaseEntity
     {
-        public int Id { get; set; }
-
+        public double Weight { get; set; }
+        public int Repetitions { get; set; }
+        public int Sets { get; set; }
+        public DateTimeOffset Date { get; set; }
         public bool Completed { get; set; }
 
-        public int ExerciceSetId { get; set; }
-        public ExerciceSet ExerciceSet { get; set; }
+        public int PlanningExerciceId { get; set; }
+        public PlanningExercice PlanningExercice { get; set; }
     }
 }

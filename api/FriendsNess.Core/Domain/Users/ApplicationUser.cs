@@ -5,5 +5,5 @@ namespace FriendsNess.Core.Domain.Users;
 
 public class ApplicationUser : IdentityUser<int>
 {
-    public ICollection<UserExercice> UserExercices { get; set; }
+    public ICollection<UserExercice> UsersExercices { get; set; }
 }

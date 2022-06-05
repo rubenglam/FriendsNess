@@ -53,5 +53,10 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         return _context.Set<TEntity>().SingleOrDefaultAsync(predicate);
     }
 
+    public void Update(TEntity entity)
+    {
+        _context.Set<TEntity>().Update(entity);
+    }
+
     protected FriendsNessDbContext DbContext => _context;
 }

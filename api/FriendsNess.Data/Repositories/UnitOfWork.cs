@@ -7,6 +7,8 @@ public class UnitOfWork : IUnitOfWork
     private FriendsNessDbContext _context;
     private IExercicesRepository _exercicesRepository;
     private IUserExercicesRepository _userExercicesRepository;
+    private IUsersRepository _usersRepository;
+    private IExerciceSetsRepository _exerciceSetsRepository;
 
     public UnitOfWork(FriendsNessDbContext context)
     {
@@ -16,6 +18,10 @@ public class UnitOfWork : IUnitOfWork
     public IExercicesRepository Exercices => _exercicesRepository ??= new ExercicesRepository(_context);
 
     public IUserExercicesRepository UserExercices => _userExercicesRepository ??= new UserExercicesRepository(_context);
+
+    public IUsersRepository Users => _usersRepository ??= new UsersRepository(_context);
+
+    public IExerciceSetsRepository ExerciceSets => _exerciceSetsRepository ??= new ExerciceSetsRepository(_context);
 
     public async Task<int> CommitAsync()
     {

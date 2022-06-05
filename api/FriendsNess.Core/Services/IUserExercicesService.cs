@@ -1,4 +1,5 @@
 ﻿using FriendsNess.Core.Domain.Exercices;
+using FriendsNess.Core.Dtos.UserExercices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,8 @@ namespace FriendsNess.Core.Services;
 
 public interface IUserExercicesService
 {
-    Task<IEnumerable<UserExercice>> GetAllUserExercices();
-    Task<UserExercice> GetUserExerciceById(int id);
-    Task<UserExercice> CreateUserExercice(UserExercice newUserExercice);
-    Task UpdateUserExercice(UserExercice userExerciceToBeUpdated, UserExercice userExercice);
-    Task DeleteUserExercice(UserExercice userExercice);
+    Task<IEnumerable<UserExerciceResponse>> GetAllUserExercicesByUserId(int userId);
+    Task<UserExerciceResponse> GetUserExercice(int userId, int exerciceId);
+    Task CreateUserExercice(int exerciceId, int userId);
+    Task DeleteUserExercice(int exerciceId, int userId);
 }

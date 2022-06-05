@@ -15,5 +15,5 @@ public class UserExercice
     public int ExerciceId { get; set; }
     public Exercice Exercice { get; set; }
 
-    public ICollection<ExerciceSet> ExerciceSets { get; set; }
+    public ICollection<ExerciceSet> ExercicesSets { get; set; }
 }

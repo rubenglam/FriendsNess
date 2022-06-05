@@ -1,6 +1,7 @@
 using FriendsNess.Core.Domain.Users;
 using FriendsNess.Core.Models;
 using FriendsNess.Core.Repositories;
+using FriendsNess.Core.Services;
 using FriendsNess.Data;
 using FriendsNess.Data.Repositories;
 using FriendsNess.Server.Extensions;
@@ -35,14 +36,18 @@ builder.Services.AddControllers();
 
 // Añadir servicios
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ExercicesService>();
-builder.Services.AddScoped<UserExercicesService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IExercicesService, ExercicesService>();
+builder.Services.AddScoped<IUserExercicesService, UserExercicesService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IExerciceSetsService, ExerciceSetsService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddAutoMapper(typeof(Program));
 
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
+builder.Services.AddSingleton(jwtSettings);
 builder.Services.AddAuth(jwtSettings);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

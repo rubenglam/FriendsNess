@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.EntityFramework.Options;
 using FriendsNess.Core.Domain.Exercices;
+using FriendsNess.Core.Domain.Planning;
 using FriendsNess.Core.Domain.Users;
 using FriendsNess.Data.Base;
 using FriendsNess.Data.Extensions;
@@ -26,10 +27,10 @@ public class FriendsNessDbContext : KeyApiAuthorizationDbContext<ApplicationUser
         {
             x.HasKey(x => new { x.UserId, x.ExerciceId });
             x.HasOne(x => x.Exercice)
-                .WithMany(x => x.ExerciceUsers)
+                .WithMany(x => x.UsersExercices)
                 .HasForeignKey(x => x.ExerciceId);
             x.HasOne(x => x.User)
-                .WithMany(x => x.UserExercices)
+                .WithMany(x => x.UsersExercices)
                 .HasForeignKey(x => x.UserId);
         });
 
@@ -38,4 +39,7 @@ public class FriendsNessDbContext : KeyApiAuthorizationDbContext<ApplicationUser
 
     public DbSet<Exercice> Exercices { get; set; }
     public DbSet<UserExercice> UserExercices { get; set; }
+    public DbSet<ExerciceSet> ExerciceSets { get; set; }
+    public DbSet<Planning> Plannings { get; set; }
+    public DbSet<PlanningExerciceSet> PlanningExerciceSets { get; set; }
 }

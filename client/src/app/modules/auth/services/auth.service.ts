@@ -15,14 +15,17 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   private _baseUrl = environment.baseUrl;
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   register(registerRequest: RegisterRequest) {
     const url = `${this._baseUrl}/authentication/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
       tap((response) => {
         if (response.success) {
-          this.cookieService.set("auth-token", response.token!);
+          this.cookieService.set('auth-token', response.token!);
         }
       }),
       map((response) => response.success),
@@ -35,7 +38,7 @@ export class AuthService {
     return this.httpClient.post<AuthResponse>(url, signInRequest).pipe(
       tap((response) => {
         if (response.success) {
-          this.cookieService.set("auth-token", response.token!);
+          this.cookieService.set('auth-token', response.token!);
         }
       }),
       map((response) => response.success),
@@ -52,7 +55,7 @@ export class AuthService {
 
     return this.httpClient.get<AuthResponse>(url, { headers }).pipe(
       map((response) => {
-        localStorage.setItem('token', response.token!);
+        this.cookieService.set('auth-token', response.token!);
         // this._user = {
         //   email: response.email!,
         //   id: response.userId!,
@@ -65,13 +68,17 @@ export class AuthService {
     );
   }
 
-  getUserLogged() {
-    const token = this.cookieService.get("auth-token");
-    this.httpClient.get()
+  getUserLogged(userId: string) {
+    const url = `${this._baseUrl}/users/${userId}`;
+    const token = this.cookieService.get('auth-token');
+    const headers = new HttpHeaders().set('auth-token', token || '');
+    this.httpClient.get<UserResponse>(url, { headers }).pipe(map(response) => {
+
+    });
   }
 
   logout() {
-    this.cookieService.delete("auth-token");
+    this.cookieService.delete('auth-token');
   }
 
   get userEmail(): string {

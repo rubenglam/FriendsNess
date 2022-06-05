@@ -10,10 +10,11 @@ namespace FriendsNess.Core.Domain.Planning;
 
 public class Planning : BaseEntity
 {
+    public string Name { get; set; }
     public DateTimeOffset Date { get; set; }
 
     public int UserId { get; set; }
     public ApplicationUser User { get; set; }
 
-    public ICollection<PlanningExerciceSet> PlanningExercicesSets { get; set; }
+    public ICollection<PlanningExercice> PlanningsExercices { get; set; }
 }

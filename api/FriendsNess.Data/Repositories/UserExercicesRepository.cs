@@ -14,11 +14,16 @@ public class UserExercicesRepository : Repository<UserExercice>, IUserExercicesR
     {
         return DbContext.UserExercices
             .Include(x => x.Exercice)
-            .Include(x => x.ExerciceSets);
+            .Include(x => x.ExercicesSets);
+    }
+    public async Task<IList<UserExercice>> GetAllByUserId(int userId)
+    {
+        return await GetAll().Where(x => x.UserId == userId).ToListAsync();
     }
 
     public async Task<UserExercice> Get(int userId, int exerciceId)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.UserId == userId && x.ExerciceId == exerciceId);
+        return (await GetAllByUserId(userId))
+            .FirstOrDefault(x => x.ExerciceId == exerciceId);
     }
 }

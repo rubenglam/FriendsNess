@@ -3,5 +3,5 @@
 namespace FriendsNess.Core.Repositories;
 
 public interface IExercicesRepository : IRepository<Exercice>
-{ 
+{
 }
