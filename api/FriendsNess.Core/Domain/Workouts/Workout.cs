@@ -6,15 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Domain.Planning;
+namespace FriendsNess.Core.Domain.Workouts;
 
-public class Planning : BaseEntity
+public class Workout : BaseEntity
 {
+    public Workout()
+    {
+        WorkoutExercices = new List<WorkoutExercice>();
+    }
+
     public string Name { get; set; }
     public DateTimeOffset Date { get; set; }
 
     public int UserId { get; set; }
     public ApplicationUser User { get; set; }
 
-    public ICollection<PlanningExercice> PlanningsExercices { get; set; }
+    public ICollection<WorkoutExercice> WorkoutExercices { get; set; }
 }

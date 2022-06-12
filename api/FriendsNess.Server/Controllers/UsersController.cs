@@ -4,7 +4,7 @@ using FriendsNess.Core.Dtos.Users;
 using AutoMapper;
 using FriendsNess.Core.Services;
 using FriendsNess.Core.Exceptions;
-using FriendsNess.Core.Dtos.UserExercices;
+using FriendsNess.Core.Dtos.Exercices;
 
 namespace FriendsNess.Server.Controllers;
 
@@ -84,6 +84,42 @@ public class UsersController : RootController
         {
             var response = await _userExercicesService.GetUserExercice(userId, exerciceId);
             return Success(response);
+        }
+        catch (ApiException apiException)
+        {
+            return Error(apiException);
+        }
+        catch (Exception exception)
+        {
+            return Error(exception);
+        }
+    }
+
+    [HttpPost("{userId}/exercices/{exerciceId}")]
+    public async Task<ActionResult> PostUserExercice([FromRoute] int userId, [FromRoute] int exerciceId)
+    {
+        try
+        {
+            await _userExercicesService.CreateUserExercice(userId, exerciceId);
+            return Success();
+        }
+        catch (ApiException apiException)
+        {
+            return Error(apiException);
+        }
+        catch (Exception exception)
+        {
+            return Error(exception);
+        }
+    }
+
+    [HttpDelete("{userId}/exercices/{exerciceId}")]
+    public async Task<ActionResult> DeleteUserExercice([FromRoute] int userId, [FromRoute] int exerciceId)
+    {
+        try
+        {
+            await _userExercicesService.DeleteUserExercice(userId, exerciceId);
+            return Success();
         }
         catch (ApiException apiException)
         {

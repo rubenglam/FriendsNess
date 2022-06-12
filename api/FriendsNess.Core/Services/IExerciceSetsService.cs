@@ -1,5 +1,5 @@
 ﻿using FriendsNess.Core.Domain.Exercices;
-using FriendsNess.Core.Dtos.ExerciceSet;
+using FriendsNess.Core.Dtos.Exercices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

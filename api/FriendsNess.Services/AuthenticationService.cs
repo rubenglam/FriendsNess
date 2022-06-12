@@ -17,12 +17,11 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Services;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService : BaseService, IAuthenticationService
 {
     private readonly JwtSettings _jwtSettings;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
-    private readonly IMapper _mapper;
 
     public AuthenticationService(JwtSettings jwtSettings, IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
     {

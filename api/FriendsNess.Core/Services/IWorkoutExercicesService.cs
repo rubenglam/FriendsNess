@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Dtos.ExerciceSet;
+namespace FriendsNess.Core.Services;
 
-public class EditExerciceSetRequest
+public interface IWorkoutExercicesService
 {
 }

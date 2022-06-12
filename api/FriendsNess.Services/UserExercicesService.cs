@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FriendsNess.Core.Domain.Exercices;
 using FriendsNess.Core.Domain.Users;
-using FriendsNess.Core.Dtos.UserExercices;
+using FriendsNess.Core.Dtos.Exercices;
 using FriendsNess.Core.Exceptions;
 using FriendsNess.Core.Repositories;
 using FriendsNess.Core.Services;
@@ -27,7 +27,7 @@ public class UserExercicesService : IUserExercicesService
         _userManager = userManager;
     }
 
-    public async Task CreateUserExercice(int exerciceId, int userId)
+    public async Task CreateUserExercice(int userId, int exerciceId)
     {
         var user = await _userManager.FindByIdAsync(userId.ToString());
         if (user == null)
@@ -39,7 +39,7 @@ public class UserExercicesService : IUserExercicesService
         {
             throw new ApiException("Exercice doesn't exists");
         }
-        var userExercice = await _unitOfWork.UserExercices.Get(exerciceId, userId);
+        var userExercice = await _unitOfWork.UserExercices.Get(userId, exerciceId);
         if (userExercice != null)
         {
             throw new ApiException("User exercice existent");
@@ -52,9 +52,9 @@ public class UserExercicesService : IUserExercicesService
         await _unitOfWork.CommitAsync();
     }
 
-    public async Task DeleteUserExercice(int exerciceId, int userId)
+    public async Task DeleteUserExercice(int userId, int exerciceId)
     {
-        var userExercice = await _unitOfWork.UserExercices.Get(exerciceId, userId);
+        var userExercice = await _unitOfWork.UserExercices.Get(userId, exerciceId);
         if (userExercice == null)
         {
             throw new ApiException("User exercice not found");
@@ -70,9 +70,9 @@ public class UserExercicesService : IUserExercicesService
         return response;
     }
 
-    public async Task<UserExerciceResponse> GetUserExercice(int exerciceId, int userId)
+    public async Task<UserExerciceResponse> GetUserExercice(int userId, int exerciceId)
     {
-        var userExercice = await _unitOfWork.UserExercices.Get(exerciceId, userId);
+        var userExercice = await _unitOfWork.UserExercices.Get(userId, exerciceId);
         var response = _mapper.Map<UserExerciceResponse>(userExercice);
         return response;
     }

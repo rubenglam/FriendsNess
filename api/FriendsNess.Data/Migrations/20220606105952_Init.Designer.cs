@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendsNess.Data.Migrations
 {
     [DbContext(typeof(FriendsNessDbContext))]
-    [Migration("20220605134113_ExerciceSets")]
-    partial class ExerciceSets
+    [Migration("20220606105952_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2252,49 +2252,6 @@ namespace FriendsNess.Data.Migrations
                     b.ToTable("UserExercices");
                 });
 
-            modelBuilder.Entity("FriendsNess.Core.Domain.Planning.Planning", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Plannings");
-                });
-
-            modelBuilder.Entity("FriendsNess.Core.Domain.Planning.PlanningExerciceSet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("ExerciceSetId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlanningId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExerciceSetId");
-
-                    b.HasIndex("PlanningId");
-
-                    b.ToTable("PlanningExerciceSets");
-                });
-
             modelBuilder.Entity("FriendsNess.Core.Domain.Users.ApplicationRole", b =>
                 {
                     b.Property<int>("Id")
@@ -2385,6 +2342,80 @@ namespace FriendsNess.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.Workout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Workouts");
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.WorkoutExercice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExerciceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciceId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("WorkoutExercices");
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.WorkoutExerciceSet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Repetitions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sets")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double");
+
+                    b.Property<int>("WorkoutExerciceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkoutExerciceId");
+
+                    b.ToTable("WorkoutExerciceSets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -2500,7 +2531,7 @@ namespace FriendsNess.Data.Migrations
             modelBuilder.Entity("FriendsNess.Core.Domain.Exercices.UserExercice", b =>
                 {
                     b.HasOne("FriendsNess.Core.Domain.Exercices.Exercice", "Exercice")
-                        .WithMany("Users")
+                        .WithMany("UserExercices")
                         .HasForeignKey("ExerciceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2516,10 +2547,10 @@ namespace FriendsNess.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FriendsNess.Core.Domain.Planning.Planning", b =>
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.Workout", b =>
                 {
                     b.HasOne("FriendsNess.Core.Domain.Users.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Workouts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2527,19 +2558,34 @@ namespace FriendsNess.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FriendsNess.Core.Domain.Planning.PlanningExerciceSet", b =>
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.WorkoutExercice", b =>
                 {
-                    b.HasOne("FriendsNess.Core.Domain.Exercices.ExerciceSet", "ExerciceSet")
+                    b.HasOne("FriendsNess.Core.Domain.Exercices.Exercice", "Exercice")
                         .WithMany()
-                        .HasForeignKey("ExerciceSetId")
+                        .HasForeignKey("ExerciceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FriendsNess.Core.Domain.Planning.Planning", null)
-                        .WithMany("PlanningExercicesSets")
-                        .HasForeignKey("PlanningId");
+                    b.HasOne("FriendsNess.Core.Domain.Workouts.Workout", "Workout")
+                        .WithMany("WorkoutExercices")
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ExerciceSet");
+                    b.Navigation("Exercice");
+
+                    b.Navigation("Workout");
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.WorkoutExerciceSet", b =>
+                {
+                    b.HasOne("FriendsNess.Core.Domain.Workouts.WorkoutExercice", "WorkoutExercice")
+                        .WithMany("WorkoutExerciceSets")
+                        .HasForeignKey("WorkoutExerciceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkoutExercice");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -2595,7 +2641,7 @@ namespace FriendsNess.Data.Migrations
 
             modelBuilder.Entity("FriendsNess.Core.Domain.Exercices.Exercice", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("UserExercices");
                 });
 
             modelBuilder.Entity("FriendsNess.Core.Domain.Exercices.UserExercice", b =>
@@ -2603,14 +2649,21 @@ namespace FriendsNess.Data.Migrations
                     b.Navigation("ExerciceSets");
                 });
 
-            modelBuilder.Entity("FriendsNess.Core.Domain.Planning.Planning", b =>
-                {
-                    b.Navigation("PlanningExercicesSets");
-                });
-
             modelBuilder.Entity("FriendsNess.Core.Domain.Users.ApplicationUser", b =>
                 {
                     b.Navigation("UserExercices");
+
+                    b.Navigation("Workouts");
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.Workout", b =>
+                {
+                    b.Navigation("WorkoutExercices");
+                });
+
+            modelBuilder.Entity("FriendsNess.Core.Domain.Workouts.WorkoutExercice", b =>
+                {
+                    b.Navigation("WorkoutExerciceSets");
                 });
 #pragma warning restore 612, 618
         }

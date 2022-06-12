@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Dtos.ExerciceSet;
+namespace FriendsNess.Core.Dtos.Exercices;
 
-public class ExerciceSetResponse
+public class CreateExerciceSetRequest
 {
-    public int Id { get; set; }
     public double Weight { get; set; }
     public int Repetitions { get; set; }
     public int Sets { get; set; }

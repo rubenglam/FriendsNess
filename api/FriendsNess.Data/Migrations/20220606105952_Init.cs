@@ -216,9 +216,9 @@ namespace FriendsNess.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProviderKey = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                    ProviderKey = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -266,9 +266,9 @@ namespace FriendsNess.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    LoginProvider = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Value = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -278,6 +278,29 @@ namespace FriendsNess.Data.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Workouts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Date = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workouts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Workouts_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -311,7 +334,34 @@ namespace FriendsNess.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "ExerciceSet",
+                name: "WorkoutExercices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ExerciceId = table.Column<int>(type: "int", nullable: false),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkoutExercices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkoutExercices_Exercices_ExerciceId",
+                        column: x => x.ExerciceId,
+                        principalTable: "Exercices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WorkoutExercices_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ExerciceSets",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -326,12 +376,37 @@ namespace FriendsNess.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciceSet", x => x.Id);
+                    table.PrimaryKey("PK_ExerciceSets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExerciceSet_UserExercices_UserExerciceUserId_UserExerciceExe~",
+                        name: "FK_ExerciceSets_UserExercices_UserExerciceUserId_UserExerciceEx~",
                         columns: x => new { x.UserExerciceUserId, x.UserExerciceExerciceId },
                         principalTable: "UserExercices",
                         principalColumns: new[] { "UserId", "ExerciceId" },
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "WorkoutExerciceSets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Weight = table.Column<double>(type: "double", nullable: false),
+                    Repetitions = table.Column<int>(type: "int", nullable: false),
+                    Sets = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
+                    Completed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    WorkoutExerciceId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkoutExerciceSets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkoutExerciceSets_WorkoutExercices_WorkoutExerciceId",
+                        column: x => x.WorkoutExerciceId,
+                        principalTable: "WorkoutExercices",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -680,8 +755,8 @@ namespace FriendsNess.Data.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciceSet_UserExerciceUserId_UserExerciceExerciceId",
-                table: "ExerciceSet",
+                name: "IX_ExerciceSets_UserExerciceUserId_UserExerciceExerciceId",
+                table: "ExerciceSets",
                 columns: new[] { "UserExerciceUserId", "UserExerciceExerciceId" });
 
             migrationBuilder.CreateIndex(
@@ -713,6 +788,26 @@ namespace FriendsNess.Data.Migrations
                 name: "IX_UserExercices_ExerciceId",
                 table: "UserExercices",
                 column: "ExerciceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkoutExercices_ExerciceId",
+                table: "WorkoutExercices",
+                column: "ExerciceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkoutExercices_WorkoutId",
+                table: "WorkoutExercices",
+                column: "WorkoutId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkoutExerciceSets_WorkoutExerciceId",
+                table: "WorkoutExerciceSets",
+                column: "WorkoutExerciceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workouts_UserId",
+                table: "Workouts",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -736,7 +831,7 @@ namespace FriendsNess.Data.Migrations
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
-                name: "ExerciceSet");
+                name: "ExerciceSets");
 
             migrationBuilder.DropTable(
                 name: "Keys");
@@ -745,16 +840,25 @@ namespace FriendsNess.Data.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
+                name: "WorkoutExerciceSets");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "UserExercices");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "WorkoutExercices");
 
             migrationBuilder.DropTable(
                 name: "Exercices");
+
+            migrationBuilder.DropTable(
+                name: "Workouts");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

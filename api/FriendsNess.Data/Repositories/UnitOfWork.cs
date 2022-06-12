@@ -9,6 +9,10 @@ public class UnitOfWork : IUnitOfWork
     private IUserExercicesRepository _userExercicesRepository;
     private IUsersRepository _usersRepository;
     private IExerciceSetsRepository _exerciceSetsRepository;
+    private IWorkoutsRepository _workoutsRepository;
+    private IWorkoutExercicesRepository _workoutExercicesRepository;
+    private IWorkoutExerciceSetsRepository _workoutExerciceSetsRepository;
+    private IRoutinesRepository _routinesRepository;
 
     public UnitOfWork(FriendsNessDbContext context)
     {
@@ -16,12 +20,13 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IExercicesRepository Exercices => _exercicesRepository ??= new ExercicesRepository(_context);
-
-    public IUserExercicesRepository UserExercices => _userExercicesRepository ??= new UserExercicesRepository(_context);
-
+    public IUserExercicesRepository UserExercices => _userExercicesRepository ??= new UsersExercicesRepository(_context);
     public IUsersRepository Users => _usersRepository ??= new UsersRepository(_context);
-
     public IExerciceSetsRepository ExerciceSets => _exerciceSetsRepository ??= new ExerciceSetsRepository(_context);
+    public IWorkoutsRepository Workouts => _workoutsRepository ??= new WorkoutsRepository(_context);
+    public IWorkoutExercicesRepository WorkoutExercices => _workoutExercicesRepository ??= new WorkoutExercicesRepository(_context);
+    public IWorkoutExerciceSetsRepository WorkoutExerciceSets => _workoutExerciceSetsRepository ??= new WorkoutExerciceSetsRepository(_context);
+    public IRoutinesRepository Routines => _routinesRepository ??= new RoutinesRepository(_context);
 
     public async Task<int> CommitAsync()
     {

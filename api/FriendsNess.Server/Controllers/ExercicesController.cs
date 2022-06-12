@@ -58,42 +58,6 @@ public class ExercicesController : RootController
         }
     }
 
-    [HttpPost("{exerciceId}/users/{userId}")]
-    public async Task<ActionResult> PostUserExercice([FromRoute] int exerciceId, [FromRoute] int userId)
-    {
-        try
-        {
-            await _userExercicesService.CreateUserExercice(exerciceId, userId);
-            return Success();
-        }
-        catch (ApiException apiException)
-        {
-            return Error(apiException);
-        }
-        catch (Exception exception)
-        {
-            return Error(exception);
-        }
-    }
-
-    [HttpDelete("{exerciceId}/users/{userId}")]
-    public async Task<ActionResult> DeleteUserExercice([FromRoute] int exerciceId, [FromRoute] int userId)
-    {
-        try
-        {
-            await _userExercicesService.DeleteUserExercice(exerciceId, userId);
-            return Success();
-        }
-        catch (ApiException apiException)
-        {
-            return Error(apiException);
-        }
-        catch (Exception exception)
-        {
-            return Error(exception);
-        }
-    }
-
     //[HttpPost]
     //public async Task<ActionResult<Exercice>> PostExercice(Exercice exercice)
     //{

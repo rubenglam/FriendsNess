@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FriendsNess.Core.Services;
+namespace FriendsNess.Core.Dtos.Workouts;
 
-public interface IPlanningsService
+public class CreateWorkoutExerciceRequest
 {
 }

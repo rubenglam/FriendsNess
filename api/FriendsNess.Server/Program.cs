@@ -41,6 +41,10 @@ builder.Services.AddScoped<IExercicesService, ExercicesService>();
 builder.Services.AddScoped<IUserExercicesService, UserExercicesService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IExerciceSetsService, ExerciceSetsService>();
+builder.Services.AddScoped<IWorkoutsService, WorkoutsService>();
+builder.Services.AddScoped<IWorkoutExercicesService, WorkoutExercicesService>();
+builder.Services.AddScoped<IWorkoutExerciceSetsService, WorkoutExerciceSetsService>();
+builder.Services.AddScoped<IRoutinesService, RoutinesService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 

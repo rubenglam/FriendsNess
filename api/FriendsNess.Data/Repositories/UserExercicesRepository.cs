@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FriendsNess.Data.Repositories;
 
-public class UserExercicesRepository : Repository<UserExercice>, IUserExercicesRepository
+public class UsersExercicesRepository : Repository<UserExercice>, IUserExercicesRepository
 {
-    public UserExercicesRepository(FriendsNessDbContext dbContext) : base(dbContext)
+    public UsersExercicesRepository(FriendsNessDbContext dbContext) : base(dbContext)
     {
     }
 
@@ -14,7 +14,7 @@ public class UserExercicesRepository : Repository<UserExercice>, IUserExercicesR
     {
         return DbContext.UserExercices
             .Include(x => x.Exercice)
-            .Include(x => x.ExercicesSets);
+            .Include(x => x.ExerciceSets);
     }
     public async Task<IList<UserExercice>> GetAllByUserId(int userId)
     {

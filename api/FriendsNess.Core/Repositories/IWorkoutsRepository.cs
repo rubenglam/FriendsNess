@@ -1,4 +1,4 @@
-﻿using FriendsNess.Core.Domain.Planning;
+﻿using FriendsNess.Core.Domain.Workouts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Repositories;
 
-public interface IPlanningsRepository : IRepository<Planning>
+public interface IWorkoutsRepository : IRepository<Workout>
 {
 }

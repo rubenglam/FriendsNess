@@ -1,5 +1,5 @@
 ﻿using FriendsNess.Core.Domain.Exercices;
-using FriendsNess.Core.Dtos.ExerciceSet;
+using FriendsNess.Core.Dtos.Exercices;
 using FriendsNess.Core.Exceptions;
 using FriendsNess.Core.Services;
 using Microsoft.AspNetCore.Mvc;
