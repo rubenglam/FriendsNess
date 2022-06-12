@@ -72,9 +72,9 @@ export class AuthService {
     const url = `${this._baseUrl}/users/${userId}`;
     const token = this.cookieService.get('auth-token');
     const headers = new HttpHeaders().set('auth-token', token || '');
-    this.httpClient.get<UserResponse>(url, { headers }).pipe(map(response) => {
+    // this.httpClient.get<UserResponse>(url, { headers }).pipe(map(response) => {
 
-    });
+    // });
   }
 
   logout() {
@@ -82,6 +82,7 @@ export class AuthService {
   }
 
   get userEmail(): string {
-    return this._userEmail;
+    return "hola";
+    //return this._userEmail;
   }
 }
