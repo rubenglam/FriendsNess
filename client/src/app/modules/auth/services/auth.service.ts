@@ -82,7 +82,7 @@ export class AuthService {
   }
 
   get userEmail(): string {
-    return "hola";
+    return undefined;
     //return this._userEmail;
   }
 }

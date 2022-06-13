@@ -8,26 +8,11 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
-  items: MenuItem[];
-
+export class NavbarComponent {
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Home',
-      },
-      {
-        label: 'Exercices'
-      },
-      {
-        label: 'Workouts'
-      },
-      {
-        label: 'Account'
-      }
-    ];
+  navTogglerClicked(e: Event) : void {
+    const element = e.target;
   }
 
   get isLogged() {
