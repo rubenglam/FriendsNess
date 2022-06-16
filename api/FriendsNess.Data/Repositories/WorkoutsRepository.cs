@@ -15,7 +15,7 @@ public class WorkoutsRepository : Repository<Workout>, IWorkoutsRepository
     {
     }
 
-    public IQueryable<Workout> GetAll()
+    public IQueryable<Workout> GetAllQueryable()
     {
         return DbContext.Workouts
             .Include(x => x.WorkoutExercices)
@@ -24,8 +24,13 @@ public class WorkoutsRepository : Repository<Workout>, IWorkoutsRepository
                 .ThenInclude(x => x.Exercice);
     }
 
+    public async Task<IList<Workout>> GetAll()
+    {
+        return await GetAllQueryable().ToListAsync();
+    }
+
     public async Task<Workout> Get(int id)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await GetAllQueryable().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

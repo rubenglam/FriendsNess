@@ -9,6 +9,6 @@ namespace FriendsNess.Core.Services;
 
 public interface IWorkoutsService
 {
-    Task<IEnumerable<WorkoutResponse>> GetAllWorkouts();
+    Task<IList<WorkoutResponse>> GetAllWorkouts();
     Task<WorkoutResponse> GetWorkoutById(int workoutId);
 }

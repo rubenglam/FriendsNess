@@ -4,6 +4,7 @@ using FriendsNess.Core.Dtos.Exercices;
 using FriendsNess.Core.Exceptions;
 using FriendsNess.Core.Repositories;
 using FriendsNess.Core.Services;
+using FriendsNess.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,10 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Services;
 
-public class ExercicesService : IExercicesService
+public class ExercicesService : BaseService, IExercicesService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-
-    public ExercicesService(IUnitOfWork unitOfWork, IMapper mapper)
+    public ExercicesService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     //public async Task<Exercice> CreateExercice(Exercice newExercice)
@@ -36,16 +32,16 @@ public class ExercicesService : IExercicesService
     //    await _unitOfWork.CommitAsync();
     //}
 
-    public async Task<IEnumerable<ExerciceResponse>> GetAllExercices()
+    public async Task<IList<ExerciceResponse>> GetAllExercices()
     {
-        var exercices = await _unitOfWork.Exercices.GetAllAsync();
-        var response = _mapper.Map<List<ExerciceResponse>>(exercices);
+        var exercices = await _unitOfWork.Exercices.GetAll();
+        var response = _mapper.Map<IList<ExerciceResponse>>(exercices);
         return response;
     }
 
     public async Task<ExerciceResponse> GetExerciceById(int exerciceId)
     {
-        var exercice = await _unitOfWork.Exercices.GetByIdAsync(exerciceId);
+        var exercice = await _unitOfWork.Exercices.Get(exerciceId);
         if (exercice == null)
         {
             throw new ApiException("No exercice found");

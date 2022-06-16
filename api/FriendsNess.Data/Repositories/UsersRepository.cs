@@ -15,13 +15,18 @@ internal class UsersRepository : Repository<ApplicationUser>, IUsersRepository
     {
     }
 
-    public IQueryable<ApplicationUser> GetAll()
+    private IQueryable<ApplicationUser> GetAllQueryable()
     {
         return DbContext.Users;
     }
 
+    public async Task<IList<ApplicationUser>> GetAll()
+    {
+        return await GetAllQueryable().ToListAsync();
+    }
+
     public async Task<ApplicationUser> Get(int id)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await GetAllQueryable().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Core.Repositories;
 
-public interface IRoutinesRepository : IRepository<Routine>
+public interface IRoutinesRepository
 {
+    Task<IList<Routine>> GetAll();
+    Task<Routine> Get(int id);
 }

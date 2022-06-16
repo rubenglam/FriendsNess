@@ -10,12 +10,13 @@ public class UsersExercicesRepository : Repository<UserExercice>, IUserExercices
     {
     }
 
-    public IQueryable<UserExercice> GetAll()
+    private IQueryable<UserExercice> GetAll()
     {
         return DbContext.UserExercices
             .Include(x => x.Exercice)
             .Include(x => x.ExerciceSets);
     }
+    
     public async Task<IList<UserExercice>> GetAllByUserId(int userId)
     {
         return await GetAll().Where(x => x.UserId == userId).ToListAsync();

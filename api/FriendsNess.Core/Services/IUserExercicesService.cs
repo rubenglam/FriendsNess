@@ -10,7 +10,7 @@ namespace FriendsNess.Core.Services;
 
 public interface IUserExercicesService
 {
-    Task<IEnumerable<UserExerciceResponse>> GetAllUserExercicesByUserId(int userId);
+    Task<IList<UserExerciceResponse>> GetAllUserExercicesByUserId(int userId);
     Task<UserExerciceResponse> GetUserExercice(int userId, int exerciceId);
     Task CreateUserExercice(int userId, int exerciceId);
     Task DeleteUserExercice(int userId, int exerciceId);

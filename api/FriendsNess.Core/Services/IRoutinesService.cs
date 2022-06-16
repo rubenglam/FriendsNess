@@ -9,6 +9,6 @@ namespace FriendsNess.Core.Services;
 
 public interface IRoutinesService
 {
-    Task<IEnumerable<RoutineResponse>> GetAllRoutines();
+    Task<IList<RoutineResponse>> GetAllRoutines();
     Task<RoutineResponse> GetRoutineById(int routineId);
 }

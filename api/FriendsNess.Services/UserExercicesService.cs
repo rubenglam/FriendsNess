@@ -14,16 +14,12 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Services;
 
-public class UserExercicesService : IUserExercicesService
+public class UserExercicesService : BaseService, IUserExercicesService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserExercicesService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager)
+    public UserExercicesService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager) : base(unitOfWork, mapper)
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
         _userManager = userManager;
     }
 
@@ -79,7 +75,7 @@ public class UserExercicesService : IUserExercicesService
 
     public async Task<UserExerciceResponse> GetUserExerciceById(int userExerciceId)
     {
-        var userExercice = await _unitOfWork.UserExercices.GetByIdAsync(userExerciceId);
+        var userExercice = await _unitOfWork.UserExercices.Get(userExerciceId);
         var response = _mapper.Map<UserExerciceResponse>(userExercice);
         return response;
     }

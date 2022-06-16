@@ -2,6 +2,8 @@
 
 namespace FriendsNess.Core.Repositories;
 
-public interface IExercicesRepository : IRepository<Exercice>
+public interface IExercicesRepository
 {
+    Task<IList<Exercice>> GetAll();
+    Task<Exercice> Get(int id);
 }

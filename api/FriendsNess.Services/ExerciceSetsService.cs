@@ -12,15 +12,10 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Services;
 
-public class ExerciceSetsService : IExerciceSetsService
+public class ExerciceSetsService : BaseService, IExerciceSetsService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-
-    public ExerciceSetsService(IUnitOfWork unitOfWork, IMapper mapper)
+    public ExerciceSetsService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     public async Task<int> CreateExerciceSet(CreateExerciceSetRequest createExerciceSetRequest)

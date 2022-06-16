@@ -15,15 +15,20 @@ public class WorkoutExercicesRepository : Repository<WorkoutExercice>, IWorkoutE
     {
     }
 
-    public IQueryable<WorkoutExercice> GetAll()
+    private IQueryable<WorkoutExercice> GetAllQueryable()
     {
         return DbContext.WorkoutExercices
             .Include(x => x.WorkoutExerciceSets)
             .Include(x => x.Exercice);
     }
 
+    public async Task<IList<WorkoutExercice>> GetAll()
+    {
+        return await GetAllQueryable().ToListAsync();
+    }
+
     public async Task<WorkoutExercice> Get(int id)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await GetAllQueryable().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

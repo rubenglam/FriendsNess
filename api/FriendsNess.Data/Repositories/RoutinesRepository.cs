@@ -15,7 +15,7 @@ public class RoutinesRepository : Repository<Routine>, IRoutinesRepository
     {
     }
 
-    public IQueryable<Routine> GetAll()
+    private IQueryable<Routine> GetAllQueryable()
     {
         return DbContext.Routines
             .Include(x => x.Workouts)
@@ -26,8 +26,13 @@ public class RoutinesRepository : Repository<Routine>, IRoutinesRepository
                 .ThenInclude(x => x.Exercice);
     }
 
+    public async Task<IList<Routine>> GetAll()
+    {
+        return await GetAllQueryable().ToListAsync();
+    }
+
     public async Task<Routine> Get(int id)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await GetAllQueryable().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

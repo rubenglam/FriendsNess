@@ -10,6 +10,6 @@ namespace FriendsNess.Core.Services;
 
 public interface IUsersService
 {
-    Task<IEnumerable<UserResponse>> GetAllUsers();
+    Task<IList<UserResponse>> GetAllUsers();
     Task<UserResponse> GetUserById(int userId);
 }

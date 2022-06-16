@@ -12,15 +12,13 @@ using System.Threading.Tasks;
 
 namespace FriendsNess.Services;
 
-public class UsersService : IUsersService
+public class UsersService : BaseService, IUsersService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public UsersService(IUnitOfWork unitOfWork, IMapper mapper)
+    public UsersService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     public async Task<IEnumerable<UserResponse>> GetAllUsers()

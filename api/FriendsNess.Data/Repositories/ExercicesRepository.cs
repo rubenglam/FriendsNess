@@ -10,13 +10,18 @@ public class ExercicesRepository : Repository<Exercice>, IExercicesRepository
     {
     }
 
-    public IQueryable<Exercice> GetAll()
+    private IQueryable<Exercice> GetAllQueryable()
     {
-        return DbContext.Exercices;
+        return DbContext.Exercices.AsQueryable();
+    }
+
+    public async Task<IList<Exercice>> GetAll()
+    {
+        return await GetAllQueryable().ToListAsync();
     }
 
     public async Task<Exercice> Get(int id)
     {
-        return await GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await GetAllQueryable().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

@@ -3,6 +3,7 @@ using FriendsNess.Core.Domain.Users;
 using FriendsNess.Core.Dtos.Authentication;
 using FriendsNess.Core.Exceptions;
 using FriendsNess.Core.Models;
+using FriendsNess.Core.Repositories;
 using FriendsNess.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -23,10 +24,10 @@ public class AuthenticationService : BaseService, IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
 
-    public AuthenticationService(JwtSettings jwtSettings, IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+    public AuthenticationService(JwtSettings jwtSettings, IUnitOfWork unitOfWork, IMapper mapper, 
+        UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager) : base(unitOfWork, mapper)
     {
         _jwtSettings = jwtSettings;
-        _mapper = mapper;
         _roleManager = roleManager;
         _userManager = userManager;
     }
