@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
+import { WorkoutsModule } from './modules/workouts/workouts.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +22,13 @@ import { AuthModule } from './modules/auth/auth.module';
     HttpClientModule,
     AppRoutingModule,
     ExercicesModule,
+    WorkoutsModule,
     HomeModule,
     SharedModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    AuthModule
+    AuthModule,
   ],
   exports: [],
   providers: [CookieService],

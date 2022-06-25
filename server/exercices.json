@@ -1,0 +1,596 @@
+[
+	{
+		"name": "Bench Press",
+		"category": "Barbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Squat",
+		"category": "Barbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Deadlift",
+		"category": "Barbell",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Shoulder Press",
+		"category": "Barbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Pull Ups",
+		"category": "Bodyweight",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Dumbbell Bench Press",
+		"category": "Dumbbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Dumbbell Curl",
+		"category": "Dumbbell",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Bent Over Row",
+		"category": "Barbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Push Ups",
+		"category": "Bodyweight",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Front Squat",
+		"category": "Barbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Shoulder Press",
+		"category": "Dumbbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Sled Leg Press",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Incline Bench Press",
+		"category": "Barbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Dips",
+		"category": "Bodyweight",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Power Clean",
+		"category": "Olympic",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Lat Pulldown",
+		"category": "Cable",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Incline Dumbbell Bench Press",
+		"category": "Dumbbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Hex Bar Deadlift",
+		"category": "Barbell",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Military Press",
+		"category": "Barbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Chin Ups",
+		"category": "Bodyweight",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Sumo Deadlift",
+		"category": "Barbell",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Dumbbell Row",
+		"category": "Dumbbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Horizontal Leg Press",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Hip Thrust",
+		"category": "Barbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Lateral Raise",
+		"category": "Dumbbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Romanian Deadlift",
+		"category": "Dumbbell",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Leg Extension",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Chest Press",
+		"category": "Machine",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Clean and Jerk",
+		"category": "Olympic",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Tricep Pushdown",
+		"category": "Cable",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Snatch",
+		"category": "Olympic",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Clean",
+		"category": "Olympic",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Seated Cable Row",
+		"category": "Cable",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Hammer Curl",
+		"category": "Dumbbell",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Push Press",
+		"category": "Olympic",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Barbell Shrug",
+		"category": "Barbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Decline Bench Press",
+		"category": "Barbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Close Grip Bench Press",
+		"category": "Barbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Clean and Press",
+		"category": "Olympic",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Seated Leg Curl",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Fly",
+		"category": "Dumbbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "T Bar Row",
+		"category": "Barbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Machine Calf Raise",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Lying Leg Curl",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Lunge",
+		"category": "Dumbbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "EZ Bar Curl",
+		"category": "Barbell",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Tricep Rope Pushdown",
+		"category": "Cable",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Dumbbell Shrug",
+		"category": "Dumbbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Lying Tricep Extension",
+		"category": "Barbell",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Seated Shoulder Press",
+		"category": "Barbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Goblet Squat",
+		"category": "Dumbbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Tricep Extension",
+		"category": "Dumbbell",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Rack Pull",
+		"category": "Barbell",
+		"bodyPart": "WholeBody"
+	},
+	{
+		"name": "Preacher Curl",
+		"category": "Dumbbell",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Vertical Leg Press",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Pendlay Row",
+		"category": "Barbell",
+		"bodyPart": "Back"
+	},
+	{
+		"name": "Dumbbell Bulgarian Split Squat",
+		"category": "Dumbbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Machine Shoulder Press",
+		"category": "Machine",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Machine Chest Fly",
+		"category": "Machine",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Upright Row",
+		"category": "Barbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Tricep Extension",
+		"category": "Barbell",
+		"bodyPart": "Triceps"
+	},
+	{
+		"name": "Box Squat",
+		"category": "Barbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Front Raise",
+		"category": "Dumbbell",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Hack Squat",
+		"category": "Machine",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Dumbbell Concentration Curl",
+		"category": "Dumbbell",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Cable Bicep Curl",
+		"category": "Cable",
+		"bodyPart": "Biceps"
+	},
+	{
+		"name": "Sit Ups",
+		"category": "Bodyweight",
+		"bodyPart": "Core"
+	},
+	{
+		"name": "Cable Lateral Raise",
+		"category": "Cable",
+		"bodyPart": "Shoulders"
+	},
+	{
+		"name": "Arnold Press",
+		"category": "Dumbbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Bodyweight Squat",
+		"category": "Bodyweight",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Bulgarian Split Squat",
+		"category": "Barbell",
+		"bodyPart": "Legs"
+	},
+	{
+		"name": "Floor Press",
+		"category": "Barbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Incline Dumbbell Fly",
+		"category": "Dumbbell",
+		"bodyPart": "Chest"
+	},
+	{
+		"name": "Good Morning"
+	},
+	{
+		"name": "Cable Fly"
+	},
+	{
+		"name": "Hang Clean"
+	},
+	{
+		"name": "Seated Calf Raise"
+	},
+	{
+		"name": "Muscle Ups"
+	},
+	{
+		"name": "Stiff Leg Deadlift"
+	},
+	{
+		"name": "Barbell Lunge"
+	},
+	{
+		"name": "Zercher Squat"
+	},
+	{
+		"name": "Dumbbell Romanian Deadlift"
+	},
+	{
+		"name": "Overhead Squat"
+	},
+	{
+		"name": "Dumbbell Pullover"
+	},
+	{
+		"name": "Cable Crunch"
+	},
+	{
+		"name": "Lying Dumbbell Tricep Extension"
+	},
+	{
+		"name": "Smite Machine Bench Press"
+	},
+	{
+		"name": "Face Pull"
+	},
+	{
+		"name": "Hip Abduction"
+	},
+	{
+		"name": "Incline Dumbbell Curl"
+	},
+	{
+		"name": "Dumbbell Floor Press"
+	},
+	{
+		"name": "Thruster"
+	},
+	{
+		"name": "Dumbbell Reverse Fly"
+	},
+	{
+		"name": "Machine Row"
+	},
+	{
+		"name": "Push Jerk"
+	},
+	{
+		"name": "Wrist Curl"
+	},
+	{
+		"name": "Smith Machine Squat"
+	},
+	{
+		"name": "Power Snatch"
+	},
+	{
+		"name": "Hip Adduction"
+	},
+	{
+		"name": "Dumbbell Tricep Kickback"
+	},
+	{
+		"name": "Chest Supported Dumbbell Row"
+	},
+	{
+		"name": "Decline Dumbbell Bench Press"
+	},
+	{
+		"name": "Split Squat"
+	},
+	{
+		"name": "Seated Dip Machine"
+	},
+	{
+		"name": "Machine Seated Crunch"
+	},
+	{
+		"name": "Cable Pull Through"
+	},
+	{
+		"name": "Reverse Grip Bench Press"
+	},
+	{
+		"name": "Crunches"
+	},
+	{
+		"name": "Reverse Wrist Curl"
+	},
+	{
+		"name": "Dumbbell High Pull"
+	},
+	{
+		"name": "Hex Bar Shrug"
+	},
+	{
+		"name": "Cable Hammer Curl"
+	},
+	{
+		"name": "Clap Pull Up"
+	},
+	{
+		"name": "Single Leg Dumbbell Deadlift"
+	},
+	{
+		"name": "Dumbbell Face Pull"
+	},
+	{
+		"name": "Side Leg Lift"
+	},
+	{
+		"name": "Cable External Rotation"
+	},
+	{
+		"name": "Dumbbell Hang Clean"
+	},
+	{
+		"name": "Zercher Deadlift"
+	},
+	{
+		"name": "Cable Shrug"
+	},
+	{
+		"name": "Paused Squat"
+	},
+	{
+		"name": "Half Squat"
+	},
+	{
+		"name": "Side Crunch"
+	},
+	{
+		"name": "Jefferson Squat"
+	},
+
+	{
+		"name": "Bent Arm Barbell Pullover"
+	},
+	{
+		"name": "Dumbbell Clean and Press"
+	},
+	{
+		"name": "Close Grip Incline Bench Press"
+	},
+	{
+		"name": "Overhead Cable Curl"
+	},
+	{
+		"name": "Floor Hip Abduction"
+	},
+	{
+		"name": "Hang Snatch"
+	},
+	{
+		"name": "Standing Cable Crunch"
+	},
+	{
+		"name": "Behind The Back Barbell Shrug"
+	},
+	{
+		"name": "Archer Push Ups"
+	},
+	{
+		"name": "Squat Thrust"
+	},
+	{
+		"name": "Hip Extension"
+	},
+	{
+		"name": "Roman Chair Side Bend"
+	},
+	{
+		"name": "Glute Kickback"
+	},
+	{
+		"name": "Superman"
+	},
+	{
+		"name": "Meadows Row"
+	},
+	{
+		"name": "Spoto Press"
+	},
+	{
+		"name": "Dumbbell Thruster"
+	},
+	{
+		"name": "Scissor Kicks"
+	},
+	{
+		"name": "Dumbbell Walking Calf Raise"
+	},
+	{
+		"name": "Reverse Hyperextension"
+	},
+	{
+		"name": "Behind The Back Deadlift"
+	},
+	{
+		"name": "Floor Hip Extension"
+	},
+	{
+		"name": "Incline Cable Curl"
+	},
+	{
+		"name": "High Pulley Crunch"
+	},
+	{
+		"name": "Lying Cable Curl"
+	}
+]

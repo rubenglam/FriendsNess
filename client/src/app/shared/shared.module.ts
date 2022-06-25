@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AppRoutingModule } from '../app-routing.module';
 
-import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    NavbarComponent
-  ],
-  exports: [
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    PrimeNgModule
-  ]
+  declarations: [NavbarComponent, NotFoundComponent],
+  exports: [NavbarComponent, NotFoundComponent],
+  imports: [CommonModule, RouterModule],
 })
-export class SharedModule { }
+export class SharedModule {}
