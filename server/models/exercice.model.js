@@ -12,10 +12,6 @@ const ExerciceSchema = Schema({
 	bodyPart: {
 		type: String,
 	},
-	user: {
-		type: Schema.Types.ObjectId,
-		ref: 'User',
-	},
 });
 
 ExerciceSchema.method('toJSON', function () {

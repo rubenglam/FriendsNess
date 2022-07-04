@@ -11,10 +11,10 @@ const UserExerciceSchema = Schema({
 		ref: 'Exercice',
 		required: true,
 	},
-	exerciceSets: [
+	userExerciceSets: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'ExerciceSet',
+			ref: 'UserExerciceSet',
 		},
 	],
 });

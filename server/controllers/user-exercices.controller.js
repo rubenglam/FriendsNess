@@ -1,19 +1,18 @@
 const { request, response } = require('express');
-const bcryptjs = require('bcryptjs');
 
-const UserExercice = require('../models/user-exercice.model');
-const UserExerciceSet = require('../models/user-exercice-set.model');
+const UserExerciceSchema = require('../models/user-exercice.model');
 
-const getUserExercices = async (req = request, res = response) => {
-	const userId = req.params.userId;
+const getUserExercicesByUser = async (req = request, res = response) => {
+	const uid = req.uid;
 
 	try {
-		const userExercices = UserExercice.find().populate('UserExerciceSet');
+		const userExercices = await UserExerciceSchema.find({ user: uid }).populate('userExerciceSet').populate('exercice');
 
 		res.json({
 			userExercices,
 		});
 	} catch (error) {
+		console.log(error);
 		return res.status(500).json({
 			msg: 'Unknow error',
 		});
@@ -24,12 +23,13 @@ const getUserExerciceById = async (req = request, res = response) => {
 	const id = req.params.id;
 
 	try {
-		const userExercice = UserExercice.findById(id).populate('UserExerciceSet');
+		const userExercice = UserExerciceSchema.findById(id).populate('userExerciceSet').populate('exercice');
 
 		res.json({
 			userExercice,
 		});
 	} catch (error) {
+		console.log(error);
 		return res.status(500).json({
 			msg: 'Unknow error',
 		});
@@ -37,19 +37,20 @@ const getUserExerciceById = async (req = request, res = response) => {
 };
 
 const createUserExercice = async (req = request, res = response) => {
-	const userId = req.id;
-	const workout = new Workout({
-		user: userId,
+	const uid = req.uid;
+	const userExercice = new UserExerciceSchema({
+		user: uid,
 		...req.body,
 	});
 
 	try {
-		const dbWorkout = await workout.save();
+		const createdUserExercice = await userExercice.save();
 
 		res.json({
-			dbWorkout,
+			userExercice: createdUserExercice,
 		});
 	} catch (error) {
+		console.log(error);
 		return res.status(500).json({
 			msg: 'Unknow error',
 		});
@@ -61,36 +62,59 @@ const updateUserExercice = async (req = request, res = response) => {
 	const uid = req.uid;
 
 	try {
-		const hospital = await Hospital.findById(id);
-
-		if (!hospital) {
+		// Comprobar que existe la relación userio con el ejercicio
+		const dbUserExercice = await UserExerciceSchema.findById(id);
+		if (!dbUserExercice) {
 			return res.status(404).json({
-				ok: true,
-				msg: 'Hospital no encontrado por id',
+				msg: 'User exercice not found',
 			});
 		}
 
-		const cambiosHospital = {
+		// Crear el model con los nuevos datos
+		const userExercice = {
 			...req.body,
-			usuario: uid,
+			user: uid,
 		};
 
-		const hospitalActualizado = await Hospital.findByIdAndUpdate(id, cambiosHospital, { new: true });
+		// Actualizar la tabla y devolver los nuevos datos
+		const updatedUserExercice = await UserExerciceSchema.findByIdAndUpdate(id, userExercice, { new: true });
 
+		// Añadir el modelo actualizado a la response
 		res.json({
-			ok: true,
-			hospital: hospitalActualizado,
+			userExercice: updatedUserExercice,
 		});
 	} catch (error) {
 		console.log(error);
-
 		res.status(500).json({
-			ok: false,
-			msg: 'Hable con el administrador',
+			msg: 'Unknow error',
 		});
 	}
 };
 
-const deleteUserExercice = async (req = request, res = response) => {};
+const deleteUserExercice = async (req = request, res = response) => {
+	const id = req.params.id;
 
-module.exports = { getUserExercices, getUserExerciceById, createUserExercice, updateUserExercice, deleteUserExercice };
+	try {
+		// Si no existe el usuario devuelve un error
+		const userExists = await User.findById(id);
+		if (!userExists) {
+			return res.status(404).json({
+				msg: 'User exercice not found',
+			});
+		}
+
+		// Elimina el usuario
+		await User.findByIdAndDelete(id);
+
+		res.json({
+			msg: 'User deleted',
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
+
+module.exports = { getUserExercicesByUser, getUserExerciceById, createUserExercice, updateUserExercice, deleteUserExercice };

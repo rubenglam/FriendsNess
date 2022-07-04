@@ -10,6 +10,9 @@ const router = Router();
 // GET: "/api/users/"
 router.get('', validateJWT, getUsers);
 
+// GET "/api/users/{id}"
+router.get('/:id', [validateJWT, validateFields], getUser);
+
 // POST: "/api/users"
 router.post('', [check('name', 'Name is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty(), check('email', 'Email is required').isEmail(), validateFields, validateJWT], createUser);
 

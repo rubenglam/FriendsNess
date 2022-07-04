@@ -1,22 +1,22 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { getExercices } = require('../controllers/exercices.controller');
+const { getRoutines, createRoutine, updateRoutine, deleteRoutine } = require('../controllers/routines.controller');
 const { validateFields } = require('../middlewares/validate-fields');
 const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
-// GET: "/api/routines/"
-//router.get('', validateJWT, getExercices);
+// GET: "/api/routines"
+router.get('', validateJWT, getRoutines);
 
-// // POST: "/api/users"
-// router.post('', [check('name', 'Name is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty(), check('email', 'Email is required').isEmail(), validateFields, validateJWT], createUser);
+// POST: "/api/routines"
+router.post('', [validateFields, validateJWT], createRoutine);
 
-// // PUT: "/api/users/{id}"
-// router.put('/:id', [check('name', 'Name is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty(), check('role', 'Role is required').not(), validateFields, validateJWT], updateUser);
+// PUT: "/api/routines/{id}"
+router.put('/:id', [validateFields, validateJWT], updateRoutine);
 
-// // DELETE: "/api/users/{id}"
-// router.delete('/:id', validateJWT, deleteUser);
+// DELETE: "/api/routines/{id}"
+router.delete('/:id', validateJWT, deleteRoutine);
 
 module.exports = router;

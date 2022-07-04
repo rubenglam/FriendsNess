@@ -1,17 +1,49 @@
 const { request, response } = require('express');
 const bcryptjs = require('bcryptjs');
 
-const User = require('../models/user.model');
+const UserSchema = require('../models/user.model');
 
 const getUsers = async (req = request, res = response) => {
 	const queryFrom = Number(req.query.from) || 0;
 
-	const [users, total] = await Promise.all(await User.find().skip(queryFrom).limit(10), await User.count());
+	try {
+		const [users, total] = await Promise.all(await UserSchema.find().skip(queryFrom).limit(10), await UserSchema.count());
 
-	res.json({
-		users,
-		total,
-	});
+		// Añadir los usuarios y la cantidad devueltos a la response
+		res.json({
+			users,
+			total,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
+
+const getUser = async (req = request, res = response) => {
+	const id = req.params.id;
+
+	try {
+		// Buscar el usuario a partir del identificador
+		const user = await UserSchema.findById(id);
+		if (!user) {
+			return res.status(404).json({
+				msg: 'User not found',
+			});
+		}
+
+		// Añade el usuario a la response
+		res.json({
+			user,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
 };
 
 const createUser = async (req = request, res = response) => {
@@ -39,7 +71,7 @@ const createUser = async (req = request, res = response) => {
 		res.json(user);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
@@ -83,7 +115,7 @@ const updateUser = async (req = request, res = response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
@@ -109,10 +141,10 @@ const deleteUser = async (req = request, res = response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
 };
 
-module.exports = { getUsers, createUser, updateUser, deleteUser };
+module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };

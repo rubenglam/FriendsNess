@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const ExerciceSetSchema = Schema({
+const UserExerciceSetSchema = Schema({
 	weight: {
 		type: 'Number',
 	},
@@ -13,16 +13,11 @@ const ExerciceSetSchema = Schema({
 	date: {
 		type: 'Date',
 	},
-	userExercice: {
-		type: Schema.Types.ObjectId,
-		ref: 'UserExercice',
-		required: true,
-	},
 });
 
-ExerciceSetSchema.method('toJSON', function () {
+UserExerciceSetSchema.method('toJSON', function () {
 	const { __v, ...object } = this.toObject();
 	return object;
 });
 
-module.exports = model('ExerciceSet', ExerciceSetSchema);
+module.exports = model('UserExerciceSet', UserExerciceSetSchema);

@@ -1,5 +1,4 @@
 const { request, response } = require('express');
-const bcryptjs = require('bcryptjs');
 
 const UserExerciceSet = require('../models/user-exercice-set.model');
 
@@ -14,51 +13,31 @@ const getUserExerciceSetById = async (req, res = response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
 };
 
 const createUserExerciceSet = async (req = request, res = response) => {
-	// const userExerciceSet = new UserExerciceSet({
-	// 	...req.body,
-	// });
+	const uid = req.uid;
+	const userExerciceSet = new UserExerciceSet({
+		user: uid,
+		...req.body,
+	});
 
-	// try {
-	// 	const userExerciceSet = await userExerciceSet.save();
+	try {
+		const createUserExerciceSet = await userExerciceSet.save();
 
-	// 	res.json({
-	// 		userExerciceSet,
-	// 	});
-	// } catch (error) {
-	// 	return res.status(500).json({
-	// 		msg: 'Unknow error',
-	// 	});
-	// }
-
-	// const uid = req.uid;
-	// const userExerciceSet = new UserExerciceSet({
-	// 		user: uid,
-	// 		...req.body
-	// });
-
-
-	// try {
-	// 		const createUserExerciceSet = await userExerciceSet.save();
-			
-	// 		res.json({
-	// 				userExerciceSet: createUserExerciceSet
-	// 		})
-
-	// } catch (error) {
-	// 		console.log(error);
-	// 		res.status(500).json({
-	// 				ok: false,
-	// 				msg: 'Hable con el administrador'
-	// 		})
-	// }
-
+		res.json({
+			userExerciceSet: createUserExerciceSet,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
 };
 
 const updateUserExerciceSet = async (req = request, res = response) => {
@@ -86,8 +65,7 @@ const updateUserExerciceSet = async (req = request, res = response) => {
 		});
 	} catch (error) {
 		console.log(error);
-
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
@@ -112,8 +90,7 @@ const deleteUserExerciceSet = async (req, res = response) => {
 		});
 	} catch (error) {
 		console.log(error);
-
-		res.status(500).json({
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}

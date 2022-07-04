@@ -4,14 +4,14 @@ const { googleVerify } = require('../helpers/google-verify');
 
 const bcryptjs = require('bcryptjs');
 
-const User = require('../models/user.model');
+const UserSchema = require('../models/user.model');
 
 const login = async (req = request, res = response) => {
 	const { email, password } = req.body;
 
 	try {
 		// Si no hay ningun usuario con ese email devuelve un error
-		const dbUser = await User.findOne({ email });
+		const dbUser = await UserSchema.findOne({ email });
 		if (!dbUser) {
 			return res.status(400).json({
 				msg: 'Invalid credentials',
@@ -32,7 +32,12 @@ const login = async (req = request, res = response) => {
 		res.json({
 			token,
 		});
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
 };
 
 const googleSignIn = async (req = request, res = response) => {
@@ -65,7 +70,8 @@ const googleSignIn = async (req = request, res = response) => {
 			token,
 		});
 	} catch (error) {
-		res.status(400).json({
+		console.log(error);
+		return res.status(400).json({
 			msg: 'Unknow error',
 		});
 	}
@@ -73,7 +79,12 @@ const googleSignIn = async (req = request, res = response) => {
 
 const register = async (req = request, res = response) => {
 	try {
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
 };
 
 module.exports = { login, googleSignIn, register };

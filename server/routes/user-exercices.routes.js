@@ -1,22 +1,26 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { getUserExercices } = require('../controllers/user-exercices.controller');
+const { getUserExercicesByUser, getUserExerciceById, createUserExercice, updateUserExercice, deleteUserExercice } = require('../controllers/user-exercices.controller');
 const { validateFields } = require('../middlewares/validate-fields');
 const { validateJWT } = require('../middlewares/validate-jwt');
+const { route } = require('./exercices.routes');
 
 const router = Router();
 
-// GET: "/api/user-exercices/:userId"
-router.get('/:userId', getUserExercices);
+// GET: "/api/user-exercices"
+router.get('', [validateJWT], getUserExercicesByUser);
 
-// // POST: "/api/users"
-// router.post('', [check('name', 'Name is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty(), check('email', 'Email is required').isEmail(), validateFields, validateJWT], createUser);
+// GET: "/api/user-exercices/{id}"
+router.get('/:id', [validateJWT], getUserExerciceById);
 
-// // PUT: "/api/users/{id}"
-// router.put('/:id', [check('name', 'Name is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty(), check('role', 'Role is required').not(), validateFields, validateJWT], updateUser);
+// POST: "/api/user-exercices"
+router.post('', [validateJWT], createUserExercice);
 
-// // DELETE: "/api/users/{id}"
-// router.delete('/:id', validateJWT, deleteUser);
+// PUT: "/api/user-exercices/{id}"
+router.put('/:id', [validateJWT], updateUserExercice);
+
+// DELETE: "/api/user-exercices/{id}"
+router.delete('/:id', deleteUserExercice);
 
 module.exports = router;

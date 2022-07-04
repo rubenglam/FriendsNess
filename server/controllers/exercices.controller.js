@@ -1,117 +1,144 @@
 const { request, response } = require('express');
-const bcryptjs = require('bcryptjs');
 
 const Exercice = require('../models/exercice.model');
 
 const getExercices = async (req = request, res = response) => {
-	const exercices = await Exercice.find();
+	try {
+		const exercices = await Exercice.find();
 
-	res.json({
-		exercices,
-	});
+		res.json({
+			exercices,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
 };
 
-const addUser = async (req = request, res = response) => {};
+const getExerciceById = async (req = request, res = response) => {
+	const id = req.params.id;
+	try {
+		// Buscar el ejercicio a partir del identificador
+		const exercice = await Exercice.findById(id);
+		if (!exercice) {
+			return res.status(404).json({
+				msg: 'Exercice not found',
+			});
+		}
 
-// const createExercice = async (req = request, res = response) => {
-// 	const { email, password } = req.body;
+		// Añadir el ejercicio a la response
+		res.json({
+			exercice,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
 
-// 	try {
-// 		// Comprueba si ya existe el usuario en la base de datos
-// 		const userExists = await User.findOne({ email });
-// 		if (userExists) {
-// 			return res.status(400).json({
-// 				msg: 'Email already exists',
-// 			});
-// 		}
+const createExercice = async (req = request, res = response) => {
+	const { email, password } = req.body;
 
-// 		// Crear un usuario a partir del request
-// 		const user = new User(req.body);
+	try {
+		// Comprueba si ya existe el usuario en la base de datos
+		const userExists = await User.findOne({ email });
+		if (userExists) {
+			return res.status(400).json({
+				msg: 'Email already exists',
+			});
+		}
 
-// 		// Encriptar contraseña
-// 		const salt = bcryptjs.genSaltSync();
-// 		user.password = bcryptjs.hashSync(password, salt);
+		// Crear un usuario a partir del request
+		const user = new User(req.body);
 
-// 		// Guardar el usuario
-// 		await user.save();
+		// Encriptar contraseña
+		const salt = bcryptjs.genSaltSync();
+		user.password = bcryptjs.hashSync(password, salt);
 
-// 		res.json(user);
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.status(500).json({
-// 			msg: 'Unknow error',
-// 		});
-// 	}
-// };
+		// Guardar el usuario
+		await user.save();
 
-// const updateExercice = async (req = request, res = response) => {
-// 	const id = req.params.id;
+		res.json(user);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
 
-// 	try {
-// 		// Comprobar si existe algun usuario con el id enviado
-// 		const dbUser = await User.findById(id);
-// 		if (!dbUser) {
-// 			return res.status(404).json({
-// 				msg: 'User not exists',
-// 			});
-// 		}
+const updateExercice = async (req = request, res = response) => {
+	const id = req.params.id;
 
-// 		// Separar los campos que no queremos actualizar nunca
-// 		const { password, google, email, ...fields } = req.body;
+	try {
+		// Comprobar si existe algun usuario con el id enviado
+		const dbUser = await User.findById(id);
+		if (!dbUser) {
+			return res.status(404).json({
+				msg: 'User not exists',
+			});
+		}
 
-// 		// Si existe alguno usuario con el nuevo email, devuelve un error de email ya utilizado
-// 		if (dbUser.email != email) {
-// 			const emailExists = await User.findOne({ email: req.body.email });
-// 			if (emailExists) {
-// 				return res.status(400).json({
-// 					msg: 'Email already used',
-// 				});
-// 			}
-// 		}
+		// Separar los campos que no queremos actualizar nunca
+		const { password, google, email, ...fields } = req.body;
 
-// 		// En este punto sabemos que nadie usa este email, podemos actualizarlo
-// 		fields.email = email;
+		// Si existe alguno usuario con el nuevo email, devuelve un error de email ya utilizado
+		if (dbUser.email != email) {
+			const emailExists = await User.findOne({ email: req.body.email });
+			if (emailExists) {
+				return res.status(400).json({
+					msg: 'Email already used',
+				});
+			}
+		}
 
-// 		// Actualizar usuario
-// 		const updatedUser = await User.findByIdAndUpdate(id, fields, { new: true });
+		// En este punto sabemos que nadie usa este email, podemos actualizarlo
+		fields.email = email;
 
-// 		// TODO: Validar token y comprobar si es el usuario correcto
+		// Actualizar usuario
+		const updatedUser = await User.findByIdAndUpdate(id, fields, { new: true });
 
-// 		res.json({
-// 			updatedUser,
-// 		});
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.status(500).json({
-// 			msg: 'Unknow error',
-// 		});
-// 	}
-// };
+		// TODO: Validar token y comprobar si es el usuario correcto
 
-// const deleteExercice = async (req = request, res = response) => {
-// 	const id = req.params.id;
+		res.json({
+			updatedUser,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
 
-// 	try {
-// 		// Si no existe el usuario devuelve un error
-// 		const userExists = await User.findById(id);
-// 		if (!userExists) {
-// 			return res.status(400).json({
-// 				msg: 'User no exists',
-// 			});
-// 		}
+const deleteExercice = async (req = request, res = response) => {
+	const id = req.params.id;
 
-// 		// Elimina el usuario
-// 		await User.findByIdAndDelete(id);
+	try {
+		// Si no existe el usuario devuelve un error
+		const userExists = await User.findById(id);
+		if (!userExists) {
+			return res.status(400).json({
+				msg: 'User no exists',
+			});
+		}
 
-// 		res.json({
-// 			msg: 'User deleted',
-// 		});
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.status(500).json({
-// 			msg: 'Unknow error',
-// 		});
-// 	}
-// };
+		// Elimina el usuario
+		await User.findByIdAndDelete(id);
 
-module.exports = { getExercices };
+		res.json({
+			msg: 'User deleted',
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
+
+module.exports = { getExercices, getExerciceById, createExercice, updateExercice, deleteExercice };

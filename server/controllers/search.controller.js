@@ -20,7 +20,8 @@ const getSearch = async (req = request, res = response) => {
 			workouts,
 		});
 	} catch (error) {
-		return res.status(400).json({
+		console.log(error);
+		return res.status(500).json({
 			msg: 'Unknow error',
 		});
 	}
