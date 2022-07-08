@@ -8,7 +8,8 @@ const getUserExercicesByUser = async (req = request, res = response) => {
 	try {
 		const userExercices = await UserExerciceSchema.find({ user: uid }).populate('userExerciceSet').populate('exercice');
 
-		res.json({
+		// Devolver los user exercices
+		return res.json({
 			userExercices,
 		});
 	} catch (error) {
@@ -25,7 +26,8 @@ const getUserExerciceById = async (req = request, res = response) => {
 	try {
 		const userExercice = UserExerciceSchema.findById(id).populate('userExerciceSet').populate('exercice');
 
-		res.json({
+		// Devolver el user exercice
+		return res.json({
 			userExercice,
 		});
 	} catch (error) {
@@ -46,7 +48,8 @@ const createUserExercice = async (req = request, res = response) => {
 	try {
 		const createdUserExercice = await userExercice.save();
 
-		res.json({
+		// Devolver el user exercice created
+		return res.json({
 			userExercice: createdUserExercice,
 		});
 	} catch (error) {
@@ -79,8 +82,8 @@ const updateUserExercice = async (req = request, res = response) => {
 		// Actualizar la tabla y devolver los nuevos datos
 		const updatedUserExercice = await UserExerciceSchema.findByIdAndUpdate(id, userExercice, { new: true });
 
-		// Añadir el modelo actualizado a la response
-		res.json({
+		// Devolver el user exercice actualizado
+		return res.json({
 			userExercice: updatedUserExercice,
 		});
 	} catch (error) {
@@ -106,7 +109,7 @@ const deleteUserExercice = async (req = request, res = response) => {
 		// Elimina el usuario
 		await User.findByIdAndDelete(id);
 
-		res.json({
+		return res.json({
 			msg: 'User deleted',
 		});
 	} catch (error) {

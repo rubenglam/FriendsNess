@@ -22,7 +22,7 @@ const getWorkoutExercices = async (req = request, res = response) => {
 };
 
 const getWorkoutExercice = async (req = request, res = response) => {
-	const id = req.id;
+	const id = req.params.id;
 
 	try {
 		// Buscar el workout exercice a partir del identificador

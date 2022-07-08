@@ -9,8 +9,8 @@ const getUsers = async (req = request, res = response) => {
 	try {
 		const [users, total] = await Promise.all(await UserSchema.find().skip(queryFrom).limit(10), await UserSchema.count());
 
-		// Añadir los usuarios y la cantidad devueltos a la response
-		res.json({
+		// Devolver los usuarios
+		return res.json({
 			users,
 			total,
 		});
@@ -34,8 +34,8 @@ const getUser = async (req = request, res = response) => {
 			});
 		}
 
-		// Añade el usuario a la response
-		res.json({
+		// Devolver el usuario
+		return res.json({
 			user,
 		});
 	} catch (error) {
@@ -68,7 +68,10 @@ const createUser = async (req = request, res = response) => {
 		// Guardar el usuario
 		await user.save();
 
-		res.json(user);
+		// Devolver el usuario creado
+		return res.json({
+			user,
+		});
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({
@@ -110,8 +113,9 @@ const updateUser = async (req = request, res = response) => {
 
 		// TODO: Validar token y comprobar si es el usuario correcto
 
-		res.json({
-			updatedUser,
+		// Devolver el usuario actualizado
+		return res.json({
+			user: updatedUser,
 		});
 	} catch (error) {
 		console.log(error);
@@ -136,7 +140,8 @@ const deleteUser = async (req = request, res = response) => {
 		// Elimina el usuario
 		await User.findByIdAndDelete(id);
 
-		res.json({
+		// Devolver un mensaje de usuario eliminado correctamente
+		return res.json({
 			msg: 'User deleted',
 		});
 	} catch (error) {

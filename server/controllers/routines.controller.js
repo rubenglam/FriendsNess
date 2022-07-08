@@ -6,11 +6,11 @@ const getRoutines = async (req = request, res = response) => {
 	const uid = req.uid;
 
 	try {
-		// Coger todas las rutinas relacionadas con el usuario que ha hecho la petición
+		// Coger todas las routines relacionadas con el usuario que ha hecho la petición
 		const routines = RoutineSchema.find({ user: uid }).populate('Workout').populate('WorkoutExercice').populate('WorkoutExerciceSet');
 
-		// Añade todas las rutinas a la response
-		res.json({
+		// Devolver las routines
+		return res.json({
 			routines,
 		});
 	} catch (error) {
@@ -32,8 +32,8 @@ const createRoutine = async (req = request, res = response) => {
 		// Guardar los datos en la tabla
 		const createdRoutine = await routine.save();
 
-		// Añadir el modelo creado a la response
-		res.json({
+		// Devolver la routine creada
+		return res.json({
 			routine: createdRoutine,
 		});
 	} catch (error) {
@@ -66,8 +66,8 @@ const updateRoutine = async (req = request, res = response) => {
 		// Modificar los valores de la tabla para la rutina seleccionada y devolver los nuevos datos
 		const updatedRoutine = RoutineSchema.findByIdAndUpdate(id, routine, { new: true });
 
-		// Añadir el modelo actualizado a la response
-		res.json({
+		// Devolver la routine actualizada
+		return res.json({
 			routine: updatedRoutine,
 		});
 	} catch (error) {
@@ -93,8 +93,8 @@ const deleteRoutine = async (req = request, res = response) => {
 		// Elimina la rutina de la base de datos
 		await RoutineSchema.findByIdAndDelete(id);
 
-		// Añade a la response que la rutina fue eliminada correctamente
-		res.json({
+		// Devolver un mensaje que la routine se ha eliminado correctamente
+		return res.json({
 			msg: 'Routine deleted',
 		});
 	} catch (error) {

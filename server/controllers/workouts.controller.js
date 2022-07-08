@@ -9,8 +9,8 @@ const getWorkouts = async (req = request, res = response) => {
 		// Coger todos los workouts relacionados con el usuario que realizar la petición
 		const workouts = WorkoutSchema.find({ user: uid }).populate('WorkoutExercice').populate('WorkoutExerciceSet');
 
-		// Añade todos los workouts a la response
-		res.json({
+		// Devuelve todos los workouts
+		return res.json({
 			workouts,
 		});
 	} catch (error) {
@@ -22,7 +22,7 @@ const getWorkouts = async (req = request, res = response) => {
 };
 
 const getWorkout = async (req = request, res = response) => {
-	const id = req.id;
+	const id = req.params.id;
 
 	try {
 		// Buscar el workout a partir del identificador
@@ -33,8 +33,8 @@ const getWorkout = async (req = request, res = response) => {
 			});
 		}
 
-		// Añadir el workout a la response
-		res.json({
+		// Devuelve el workout
+		return res.json({
 			workout,
 		});
 	} catch (error) {
@@ -56,8 +56,8 @@ const createWorkout = async (req = request, res = response) => {
 		// Guardar el workout en la base de datos
 		const createdWorkout = await workout.save();
 
-		// Añadir el workout creado a la response
-		res.json({
+		// Devuelve el workout creado
+		return res.json({
 			workout: createdWorkout,
 		});
 	} catch (error) {
@@ -90,8 +90,8 @@ const updateWorkout = async (req = request, res = response) => {
 		// Modificar los valores de la tabla para el workout seleccionado y devolver los nuevos datos
 		const updatedWorkout = WorkoutSchema.findByIdAndUpdate(id, workout, { new: true });
 
-		// Añadir el workout actualizado a la response
-		res.json({
+		// Devuelve el workout actualizado
+		return res.json({
 			workout: updatedWorkout,
 		});
 	} catch (error) {
@@ -117,8 +117,8 @@ const deleteWorkout = async (req = request, res = response) => {
 		// Elimina el workout de la base de datos
 		await WorkoutSchema.findByIdAndDelete(id);
 
-		// Añade a la response que el workout fue eliminado correctamente
-		res.json({
+		// Devuelve un mensaje informando que el workout fue eliminado correctamente
+		return res.json({
 			msg: 'Workout deleted',
 		});
 	} catch (error) {

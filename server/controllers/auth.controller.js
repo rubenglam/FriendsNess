@@ -29,7 +29,8 @@ const login = async (req = request, res = response) => {
 		// Generar un JWT
 		const token = await generateJWT(dbUser.id);
 
-		res.json({
+		// Devolver el token
+		return res.json({
 			token,
 		});
 	} catch (error) {
@@ -41,6 +42,7 @@ const login = async (req = request, res = response) => {
 };
 
 const googleSignIn = async (req = request, res = response) => {
+	// TODO: Make work sign in by google
 	const token = req.body.token;
 
 	try {
@@ -66,7 +68,8 @@ const googleSignIn = async (req = request, res = response) => {
 		// Generar JWT
 		const token = await generateJWT(dbUser.id);
 
-		res.json({
+		// Devolver el token generado
+		return res.json({
 			token,
 		});
 	} catch (error) {
@@ -79,6 +82,7 @@ const googleSignIn = async (req = request, res = response) => {
 
 const register = async (req = request, res = response) => {
 	try {
+		// TODO: Register
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({
