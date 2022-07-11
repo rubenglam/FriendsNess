@@ -1,4 +1,5 @@
 const { request, response } = require('express');
+
 const { generateJWT } = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
 
@@ -7,12 +8,12 @@ const bcryptjs = require('bcryptjs');
 const UserSchema = require('../models/user.model');
 
 const login = async (req = request, res = response) => {
-	const { email, password } = req.body;
-
+	const { username, password } = req.body;
+	console.log(req.body);
 	try {
 		// Si no hay ningun usuario con ese email devuelve un error
-		const dbUser = await UserSchema.findOne({ email });
-		if (!dbUser) {
+		const dbUser = await UserSchema.findOne({ username });
+		if (dbUser === null) {
 			return res.status(400).json({
 				msg: 'Invalid credentials',
 			});
@@ -20,6 +21,7 @@ const login = async (req = request, res = response) => {
 
 		// Validar si la contraseña es correcta
 		const validPassword = bcryptjs.compareSync(password, dbUser.password);
+		console.log(validPassword);
 		if (!validPassword) {
 			return res.status(400).json({
 				msg: 'Invalid credentials',
@@ -42,7 +44,7 @@ const login = async (req = request, res = response) => {
 };
 
 const googleSignIn = async (req = request, res = response) => {
-	// TODO: Make work sign in by google
+	// TODO: No acabo. Usar plataforma de GOOGLE
 	const token = req.body.token;
 
 	try {
@@ -81,8 +83,39 @@ const googleSignIn = async (req = request, res = response) => {
 };
 
 const register = async (req = request, res = response) => {
+	const { username, email, password } = req.body;
+
 	try {
-		// TODO: Register
+		// Buscar usuarios con el mismo username para devolver un error
+		const dbUser = await UserSchema.findOne({ username, email });
+		if (dbUser !== null) {
+			return res.status(400).json({
+				msg: 'Duplicated username',
+			});
+		}
+
+		// Crear un usuario con la información
+		const user = new UserSchema({
+			username,
+			email,
+			password,
+		});
+
+		// Encriptar contraseña
+		const salt = bcryptjs.genSaltSync();
+		user.password = bcryptjs.hashSync(password, salt);
+
+		// Guardar en la base de datos el nuevo usuario
+		const createdUser = await user.save();
+
+		// Generar un token para el nuevo usuario
+		const token = await generateJWT(createdUser.id);
+
+		// Devolver el usuario creado y un token
+		return res.json({
+			user: createdUser,
+			token,
+		});
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({
