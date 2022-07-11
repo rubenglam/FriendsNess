@@ -23,20 +23,21 @@ export class LoginComponent {
   ) {}
 
   login() {
+    console.log('Login');
     // Resetear variables
     this.errorMessage = undefined;
     // Mapear los datos del formulario en un request
     const request: LoginRequest = {
-      email: this.loginForm.value.email,
+      username: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
     // Enviar la petición de inició de sesión
     this.authService.login(request).subscribe((response) => {
+      console.log(response);
       // Si devuvelve true, envia al usuario al home page. En caso contrario muestra un error
       if (response === true) {
         this.router.navigateByUrl('/home');
-      }
-      else{
+      } else {
         this.errorMessage = response;
       }
     });

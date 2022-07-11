@@ -21,32 +21,29 @@ export class AuthService {
   ) {}
 
   register(registerRequest: RegisterRequest) {
-    const url = `${this._baseUrl}/authentication/register`;
+    const url = `${this._baseUrl}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
       tap((response) => {
-        if (response.success) {
-          this.cookieService.set('auth-token', response.token!);
-        }
+        console.log(response);
+        this.cookieService.set('auth-token', response.token!);
       }),
       map((response) => response.success),
       catchError((responseError) => of(responseError.error))
     );
   }
 
-  login(signInRequest: LoginRequest) {
-    const url = `${this._baseUrl}/authentication/login`;
-    return this.httpClient.post<AuthResponse>(url, signInRequest).pipe(
+  login(loginRequest: LoginRequest) {
+    const url = `${this._baseUrl}/auth/login`;
+    return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
       tap((response) => {
-        if (response.success) {
-          this.cookieService.set('auth-token', response.token!);
-        }
+        console.log(response);
+        this.cookieService.set('auth-token', response.token!);
       }),
-      map((response) => response.success),
       catchError((responseError) => of(responseError.error))
     );
   }
 
-  refreshToken(): Observable<boolean> {
+  renewToken(): Observable<boolean> {
     const url = `${this._baseUrl}/authentication/refreshtoken`;
     const headers = new HttpHeaders().set(
       'auth-token',

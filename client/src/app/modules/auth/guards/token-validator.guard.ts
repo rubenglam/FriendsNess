@@ -11,7 +11,7 @@ export class TokenValidatorGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> | boolean {
-    return this.authService.refreshToken().pipe(
+    return this.authService.renewToken().pipe(
       tap((valid) => {
         if (!valid) {
           this.router.navigateByUrl('/auth/login');
@@ -21,7 +21,7 @@ export class TokenValidatorGuard implements CanActivate, CanLoad {
   }
 
   canLoad(): Observable<boolean> | boolean {
-    return this.authService.refreshToken().pipe(
+    return this.authService.renewToken().pipe(
       tap((valid) => {
         if (!valid) {
           this.router.navigateByUrl('/auth/login');

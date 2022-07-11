@@ -29,7 +29,9 @@ export class ExercicesIndexPageComponent implements OnInit {
   }
 
   getExercices(exerciceName: string = '') {
+    console.log('getExercices');
     this.exercicesService.getExercices().subscribe((data) => {
+      console.log(data);
       this.exercices = data.filter((x) => x.name.includes(exerciceName));
     });
   }
