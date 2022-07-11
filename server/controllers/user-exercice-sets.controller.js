@@ -8,7 +8,7 @@ const getUserExerciceSetById = async (req, res = response) => {
 	try {
 		const userExerciceSet = await UserExerciceSet.findById(id).populate('userExercice');
 
-		res.json({
+		return res.json({
 			userExerciceSet,
 		});
 	} catch (error) {
@@ -29,7 +29,7 @@ const createUserExerciceSet = async (req = request, res = response) => {
 	try {
 		const createUserExerciceSet = await userExerciceSet.save();
 
-		res.json({
+		return res.json({
 			userExerciceSet: createUserExerciceSet,
 		});
 	} catch (error) {
@@ -60,7 +60,7 @@ const updateUserExerciceSet = async (req = request, res = response) => {
 
 		const updatedUserExercice = await Hospital.findByIdAndUpdate(id, requestUserExerciceSet, { new: true });
 
-		res.json({
+		return res.json({
 			userExercice: updatedUserExercice,
 		});
 	} catch (error) {
@@ -85,7 +85,7 @@ const deleteUserExerciceSet = async (req, res = response) => {
 
 		await UserExerciceSet.findByIdAndDelete(id);
 
-		res.json({
+		return res.json({
 			msg: 'User exercice set deleted',
 		});
 	} catch (error) {

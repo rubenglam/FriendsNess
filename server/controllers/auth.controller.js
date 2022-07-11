@@ -131,9 +131,18 @@ const renewToken = async (req = request, res = response) => {
 		// Generar un nuevo token
 		const token = await generateJWT(uid);
 
-		// Devolver el token renovado
+		// Comprobar la existencia del usuario
+		const user = await UserSchema.findById(uid);
+		if (!user) {
+			return res.status(401).json({
+				msg: 'User not exists',
+			});
+		}
+
+		// Devolver el token renovado y el usuario
 		return res.json({
 			token,
+			user,
 		});
 	} catch (error) {
 		console.log(error);

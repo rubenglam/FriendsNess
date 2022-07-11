@@ -20,6 +20,6 @@ router.post('', [validateJWT], createWorkoutExercice);
 router.put('/:id', [validateJWT], updateWorkoutExercice);
 
 // DELETE: "/api/workout-exercices/{id}"
-router.delete('/:id', deleteWorkoutExercice);
+router.delete('/:id', validateJWT, deleteWorkoutExercice);
 
 module.exports = router;

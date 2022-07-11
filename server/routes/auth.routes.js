@@ -17,6 +17,6 @@ router.post('/login', validateFields, login);
 router.post('/register', validateFields, register);
 
 // GET: "/api/auth/renewToken"
-router.get('/renewToken', validateJWT, renewToken);
+router.get('/renewToken', [validateFields, validateJWT], renewToken);
 
 module.exports = router;
