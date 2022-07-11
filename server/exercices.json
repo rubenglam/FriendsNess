@@ -592,5 +592,422 @@
 	},
 	{
 		"name": "Lying Cable Curl"
+	},
+	{
+		"name": "Landmine Squat"
+	},
+	{
+		"name": "Standing Leg Curl"
+	},
+	{
+		"name": "Barbell Calf Raise"
+	},
+	{
+		"name": "Reverse Barbell Curl"
+	},
+	{
+		"name": "One Arm Cable Bicep Curl"
+	},
+	{
+		"name": "Dumbbell Squat"
+	},
+	{
+		"name": "Barbell Glute Bridge"
+	},
+	{
+		"name": "Barbell Reverse Lunge"
+	},
+	{
+		"name": "Deficit Deadlift"
+	},
+	{
+		"name": "Dumbbell Calf Raise"
+	},
+	{
+		"name": "Cable Crossover"
+	},
+	{
+		"name": "Machine Tricep Extension"
+	},
+	{
+		"name": "Paused Bench Press"
+	},
+	{
+		"name": "One Arm Push Ups"
+	},
+	{
+		"name": "Close Grip Lat Pulldown"
+	},
+	{
+		"name": "Neck Curl"
+	},
+	{
+		"name": "Dumbbell Deadlift"
+	},
+	{
+		"name": "Strict Curl"
+	},
+	{
+		"name": "Cable Reverse Fly"
+	},
+	{
+		"name": "Cable Overhead Tricep Extension"
+	},
+	{
+		"name": "Belt Squat"
+	},
+	{
+		"name": "Dumbbell Upright Row"
+	},
+	{
+		"name": "Barbell Hack Squat"
+	},
+	{
+		"name": "Safety Bar Squat"
+	},
+	{
+		"name": "Machine Bicep Curl"
+	},
+	{
+		"name": "Machine Reverse Fly"
+	},
+	{
+		"name": "Behind The Neck Press"
+	},
+	{
+		"name": "Bench Pin Press"
+	},
+	{
+		"name": "Dumbbell Wrist Curl"
+	},
+	{
+		"name": "Barbell Front Raise"
+	},
+	{
+		"name": "Clean High Pull"
+	},
+	{
+		"name": "Single Leg Press"
+	},
+	{
+		"name": "Close Grip Dumbbell Bench Press"
+	},
+	{
+		"name": "Long Press"
+	},
+	{
+		"name": "Reverse Grip Lat Pulldown"
+	},
+	{
+		"name": "Bench Pull"
+	},
+	{
+		"name": "Pause Squat"
+	},
+	{
+		"name": "Handstand Push Ups"
+	},
+	{
+		"name": "Diamond Push Ups"
+	},
+	{
+		"name": "Single Leg Romanian Deadlift"
+	},
+	{
+		"name": "Sled Press Calf Raise"
+	},
+	{
+		"name": "Cable Woodchoppers"
+	},
+	{
+		"name": "Clean Pull"
+	},
+	{
+		"name": "Split Jerk"
+	},
+	{
+		"name": "Straight Arm Pulldown"
+	},
+	{
+		"name": "Sumo Squat"
+	},
+	{
+		"name": "Incline Hammer Curl"
+	},
+	{
+		"name": "Snatch Deadlift"
+	},
+	{
+		"name": "Dumbbell Preacher Curl"
+	},
+	{
+		"name": "Dumbbell Side Bend"
+	},
+	{
+		"name": "Machine Back Extension"
+	},
+	{
+		"name": "Burpees"
+	},
+	{
+		"name": "Hang Power Clean"
+	},
+	{
+		"name": "Yates Row"
+	},
+	{
+		"name": "Jefferson Deadlift"
+	},
+	{
+		"name": "Barbell Pullover"
+	},
+	{
+		"name": "Dumbbell Snatch"
+	},
+	{
+		"name": "Single Leg Deadlift"
+	},
+	{
+		"name": "Pause Deadlift"
+	},
+	{
+		"name": "Machine Lateral Raise"
+	},
+	{
+		"name": "Landmine Press"
+	},
+	{
+		"name": "Muscle Snatch"
+	},
+	{
+		"name": "Wide Grip Bench Press"
+	},
+	{
+		"name": "Seated Dumbbell Shoulder Press"
+	},
+	{
+		"name": "Reverse Grip Tricep Pushdown"
+	},
+	{
+		"name": "Dumbbell Bench Pull"
+	},
+	{
+		"name": "Cable Kickback"
+	},
+	{
+		"name": "Neck Extension"
+	},
+	{
+		"name": "Z Press"
+	},
+	{
+		"name": "Reverse Curl"
+	},
+	{
+		"name": "Renegade Row"
+	},
+	{
+		"name": "Shoulder Pin Press"
+	},
+	{
+		"name": "Zottman Curl"
+	},
+	{
+		"name": "Viking Press"
+	},
+	{
+		"name": "Neutral Grip Pull Ups"
+	},
+	{
+		"name": "Tate Press"
+	},
+	{
+		"name": "Lunge"
+	},
+	{
+		"name": "Snatch Pull"
+	},
+	{
+		"name": "Spider Curl"
+	},
+	{
+		"name": "Dumbbell Z Press"
+	},
+	{
+		"name": "JM Press"
+	},
+	{
+		"name": "Pin Squat"
+	},
+	{
+		"name": "One Arm Pull Ups"
+	},
+	{
+		"name": "Wall Ball"
+	},
+	{
+		"name": "Glute Bridge"
+	},
+	{
+		"name": "Back Extension"
+	},
+	{
+		"name": "Pistol Squat"
+	},
+	{
+		"name": "Hanging Leg Raise"
+	},
+	{
+		"name": "Inverted Row"
+	},
+	{
+		"name": "Russian Twist"
+	},
+	{
+		"name": "Bent Over Dumbbell Row"
+	},
+	{
+		"name": "Bodyweight Calf Raise"
+	},
+	{
+		"name": "Lying Leg Raise"
+	},
+	{
+		"name": "Seated Dumbbell Tricep Extension"
+	},
+	{
+		"name": "Bench Dips"
+	},
+	{
+		"name": "Ring Dips"
+	},
+	{
+		"name": "Toes To Bar"
+	},
+	{
+		"name": "Cheat Curl"
+	},
+	{
+		"name": "Seated Dumbbell Curl"
+	},
+	{
+		"name": "Dumbbell Front Squat"
+	},
+	{
+		"name": "Walking Lung"
+	},
+	{
+		"name": "Decline Push Ups"
+	},
+	{
+		"name": "Ab Wheel Rollout"
+	},
+	{
+		"name": "Reverse Lunge"
+	},
+	{
+		"name": "Dumbbell Reverse Wrist Curl"
+	},
+	{
+		"name": "Hanging Knee Raise"
+	},
+	{
+		"name": "Glute Ham Raise"
+	},
+	{
+		"name": "Nordic Hamstring Curl"
+	},
+	{
+		"name": "Decline Crunch"
+	},
+	{
+		"name": "Close Grip Push Up"
+	},
+	{
+		"name": "Decline Sit Up"
+	},
+	{
+		"name": "Jumping Jack"
+	},
+	{
+		"name": "Squat Jumps"
+	},
+	{
+		"name": "Dumbbell Push Press"
+	},
+	{
+		"name": "Incline Push Up"
+	},
+	{
+		"name": "Dumbbell External Rotation"
+	},
+	{
+		"name": "One Arm Seated Cable Row"
+	},
+	{
+		"name": "Cable Upright Row"
+	},
+	{
+		"name": "Pike Push Up"
+	},
+	{
+		"name": "Smith Machine Shrug"
+	},
+	{
+		"name": "Bicycle Crunch"
+	},
+	{
+		"name": "Ring Muscle Ups"
+	},
+	{
+		"name": "Reverse Crunches"
+	},
+	{
+		"name": "Dumbbell Split Squat"
+	},
+	{
+		"name": "Dumbbell Incline And Raise"
+	},
+	{
+		"name": "Side Lunge"
+	},
+	{
+		"name": "Sissy Squat"
+	},
+	{
+		"name": "One Arm Lat Pulldown"
+	},
+	{
+		"name": "Barbell Power Shrug"
+	},
+	{
+		"name": "Flutter Kicks"
+	},
+	{
+		"name": "Single Arm Landmine Press"
+	},
+	{
+		"name": "Single Leg Seated Calf Raise"
+	},
+	{
+		"name": "Donkey Calf Raise"
+	},
+	{
+		"name": "Machine Shrug"
+	},
+	{
+		"name": "Cable Leg Extension"
+	},
+	{
+		"name": "Decline Dumbbell Fly"
+	},
+	{
+		"name": "One Arm Pulldown"
+	},
+	{
+		"name": "Mountain Climbers"
+	},
+	{
+		"name": "Dumbbell Reverse Curl"
 	}
 ]

@@ -91,4 +91,32 @@ const register = async (req = request, res = response) => {
 	}
 };
 
-module.exports = { login, googleSignIn, register };
+const renewToken = async (req = request, res = response) => {
+	const uid = req.uid;
+
+	try {
+		// Generar un nuevo token
+		const token = await generateJWT(uid);
+
+		// Comprobar la existencia del usuario
+		const user = await UserSchema.findById(uid);
+		if (!user) {
+			return res.status(401).json({
+				msg: 'User not exists',
+			});
+		}
+
+		// Devolver el token renovado y el usuario
+		return res.json({
+			token,
+			user,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			msg: 'Unknow error',
+		});
+	}
+};
+
+module.exports = { login, googleSignIn, register, renewToken };

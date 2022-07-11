@@ -48,7 +48,7 @@ const createUserExercice = async (req = request, res = response) => {
 	try {
 		const createdUserExercice = await userExercice.save();
 
-		// Devolver el user exercice created
+		// Devolver el user exercice creado
 		return res.json({
 			userExercice: createdUserExercice,
 		});
@@ -109,6 +109,7 @@ const deleteUserExercice = async (req = request, res = response) => {
 		// Elimina el usuario
 		await User.findByIdAndDelete(id);
 
+		// Devolver un mensaje diciendo que el usuario ha sido eliminado correctamente
 		return res.json({
 			msg: 'User deleted',
 		});

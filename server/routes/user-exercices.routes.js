@@ -21,6 +21,6 @@ router.post('', [validateJWT], createUserExercice);
 router.put('/:id', [validateJWT], updateUserExercice);
 
 // DELETE: "/api/user-exercices/{id}"
-router.delete('/:id', deleteUserExercice);
+router.delete('/:id', validateJWT, deleteUserExercice);
 
 module.exports = router;
