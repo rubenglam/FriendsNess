@@ -18,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'workouts',
+    canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/workouts/workouts.module').then(
@@ -26,6 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'exercices',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/exercices/exercices.module').then(
         module => module.ExercicesModule

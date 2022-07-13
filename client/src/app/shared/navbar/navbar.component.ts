@@ -10,6 +10,10 @@ export class NavbarComponent {
   constructor(private authService: AuthService) {}
 
   get isLogged() {
-    return this.authService.userEmail !== undefined;
+    return this.authService.isAuthenticated;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

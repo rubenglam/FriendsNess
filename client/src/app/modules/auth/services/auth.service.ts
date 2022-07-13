@@ -13,41 +13,52 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class AuthService {
-  private _baseUrl = environment.baseUrl;
+  private AUTH_TOKEN = 'auth-token';
+  private AUTH_USER = 'auth-user';
+  private BASE_URL = environment.baseUrl;
 
   constructor(
     private httpClient: HttpClient,
     private cookieService: CookieService
   ) {}
 
+  verifyAuthenticated(): Observable<boolean> {
+    // Si existe el token en los cookies, generamos un nuevo token. Si todo funciona correctamente el usuario esta autenticado
+    if (this.cookieService.get(this.AUTH_TOKEN)) {
+      return this.renewToken();
+    }
+
+    // Como no existe ningún token, devolvemos que el usuario no esta autenticado
+    return of(false);
+  }
+
   register(registerRequest: RegisterRequest) {
-    const url = `${this._baseUrl}/auth/register`;
+    const url = `${this.BASE_URL}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
       tap(response => {
-        localStorage.setItem('auth-token', response.token);
-        this.cookieService.set('auth-token', response.token);
+        this.cookieService.set(this.AUTH_TOKEN, response.token);
+        this.cookieService.set(this.AUTH_USER, response.user);
       }),
-      map(response => response.success),
       catchError(responseError => of(responseError.error))
     );
   }
 
   login(loginRequest: LoginRequest) {
-    const url = `${this._baseUrl}/auth/login`;
+    const url = `${this.BASE_URL}/auth/login`;
     return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
       tap(response => {
-        localStorage.setItem('auth-token', response.token);
-        this.cookieService.set('auth-token', response.token);
+        this.cookieService.set(this.AUTH_TOKEN, response.token);
+        this.cookieService.set(this.AUTH_USER, response.user);
       }),
       catchError(errorResponse => errorResponse)
     );
   }
 
   renewToken(): Observable<boolean> {
-    const token = localStorage.getItem('auth-token') || '';
+    const token = this.cookieService.get(this.AUTH_TOKEN) || '';
 
-    const url = `${this._baseUrl}/auth/renewToken`;
-    const headers = { 'auth-token': token };
+    const url = `${this.BASE_URL}/auth/renewToken`;
+    const headers = { Authorization: `Bearer ${token}` };
 
     return this.httpClient
       .get<AuthResponse>(url, {
@@ -55,30 +66,28 @@ export class AuthService {
       })
       .pipe(
         tap(response => {
-          localStorage.setItem('auth-token', response.token);
-          this.cookieService.set('auth-token', response.token);
+          console.log(response);
+          this.cookieService.set(this.AUTH_TOKEN, response.token);
+          this.cookieService.set(this.AUTH_USER, response.user);
         }),
         map(() => true),
-        catchError(() => of(false))
+        catchError(error => {
+          console.log(error);
+          return of(false);
+        })
       );
   }
 
-  getUserLogged(userId: string) {
-    const url = `${this._baseUrl}/users/${userId}`;
-    const token = this.cookieService.get('auth-token');
-    const headers = new HttpHeaders().set('auth-token', token || '');
-    // this.httpClient.get<UserResponse>(url, { headers }).pipe(map(response) => {
-
-    // });
-  }
-
   logout() {
-    localStorage.removeItem('auth-token');
-    this.cookieService.delete('auth-token');
+    this.cookieService.delete(this.AUTH_TOKEN);
+    this.cookieService.delete(this.AUTH_USER);
   }
 
-  get userEmail(): string {
-    return undefined;
-    //return this._userEmail;
+  get isAuthenticated(): boolean {
+    return this.cookieService.get(this.AUTH_TOKEN) != null;
+  }
+
+  get getUser(): any {
+    return this.cookieService.get(this.AUTH_USER);
   }
 }
