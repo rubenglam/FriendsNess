@@ -1,12 +1,9 @@
-<div>
-  <form autocomplete="off">
-    <input
-      type="text"
-      placeholder="Search…"
-      name="value"
-      (ngModelChange)="search()"
-      class="input input-bordered w-96"
-      [(ngModel)]="_value"
-    />
-  </form>
-</div>
+<form autocomplete="off" class="bg-slate-700 rounded-md">
+  <input
+    type="text"
+    placeholder="Search…"
+    name="value"
+    (ngModelChange)="search()"
+    class="input input-bordered w-96 bg-slate-700 rounded-md p-2 hover:bg-slate-600 text-gray-300 placeholder:text-gray-300"
+    [(ngModel)]="_value" />
+</form>

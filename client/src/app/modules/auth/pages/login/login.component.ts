@@ -32,14 +32,14 @@ export class LoginComponent {
       password: this.loginForm.value.password,
     };
     // Enviar la petición de inició de sesión
-    this.authService.login(request).subscribe((response) => {
-      console.log(response);
-      // Si devuvelve true, envia al usuario al home page. En caso contrario muestra un error
-      if (response === true) {
+    this.authService.login(request).subscribe(
+      response => {
+        // Enviar al usuario a la home page
         this.router.navigateByUrl('/home');
-      } else {
-        this.errorMessage = response;
+      },
+      error => {
+        this.errorMessage = error;
       }
-    });
+    );
   }
 }

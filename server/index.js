@@ -31,6 +31,8 @@ app.use('/api/exercices', require('./routes/exercices.routes'));
 app.use('/api/user-exercices', require('./routes/user-exercices.routes'));
 app.use('/api/routines', require('./routes/routines.routes'));
 app.use('/api/workouts', require('./routes/workouts.routes'));
+app.use("/api/workout-exercices", require("./routes/workout-exercices.routes"));
+
 // app.use('/api/search', require('/./routes/search.routes'));
 
 // Encender el servidor

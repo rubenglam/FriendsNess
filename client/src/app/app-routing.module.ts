@@ -6,6 +6,7 @@ import { LoginComponent } from './modules/auth/pages/login/login.component';
 import { RegisterComponent } from './modules/auth/pages/register/register.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeIndexPageComponent, pathMatch: 'full' },
@@ -13,20 +14,21 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((module) => module.AuthModule),
+      import('./modules/auth/auth.module').then(module => module.AuthModule),
   },
   {
     path: 'workouts',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/workouts/workouts.module').then(
-        (module) => module.WorkoutsModule
+        module => module.WorkoutsModule
       ),
   },
   {
     path: 'exercices',
     loadChildren: () =>
       import('./modules/exercices/exercices.module').then(
-        (module) => module.ExercicesModule
+        module => module.ExercicesModule
       ),
   },
   { path: '**', pathMatch: 'full', component: NotFoundComponent },

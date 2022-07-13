@@ -23,46 +23,44 @@ export class AuthService {
   register(registerRequest: RegisterRequest) {
     const url = `${this._baseUrl}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
-      tap((response) => {
-        console.log(response);
-        this.cookieService.set('auth-token', response.token!);
+      tap(response => {
+        localStorage.setItem('auth-token', response.token);
+        this.cookieService.set('auth-token', response.token);
       }),
-      map((response) => response.success),
-      catchError((responseError) => of(responseError.error))
+      map(response => response.success),
+      catchError(responseError => of(responseError.error))
     );
   }
 
   login(loginRequest: LoginRequest) {
     const url = `${this._baseUrl}/auth/login`;
     return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
-      tap((response) => {
-        console.log(response);
-        this.cookieService.set('auth-token', response.token!);
+      tap(response => {
+        localStorage.setItem('auth-token', response.token);
+        this.cookieService.set('auth-token', response.token);
       }),
-      catchError((responseError) => of(responseError.error))
+      catchError(errorResponse => errorResponse)
     );
   }
 
   renewToken(): Observable<boolean> {
-    const url = `${this._baseUrl}/authentication/refreshtoken`;
-    const headers = new HttpHeaders().set(
-      'auth-token',
-      localStorage.getItem('token') || ''
-    );
+    const token = localStorage.getItem('auth-token') || '';
 
-    return this.httpClient.get<AuthResponse>(url, { headers }).pipe(
-      map((response) => {
-        this.cookieService.set('auth-token', response.token!);
-        // this._user = {
-        //   email: response.email!,
-        //   id: response.userId!,
-        //   userExercices: [],
-        //   userName: response.userName!
-        // };
-        return response.success;
-      }),
-      catchError((responseError) => of(false))
-    );
+    const url = `${this._baseUrl}/auth/renewToken`;
+    const headers = { 'auth-token': token };
+
+    return this.httpClient
+      .get<AuthResponse>(url, {
+        headers,
+      })
+      .pipe(
+        tap(response => {
+          localStorage.setItem('auth-token', response.token);
+          this.cookieService.set('auth-token', response.token);
+        }),
+        map(() => true),
+        catchError(() => of(false))
+      );
   }
 
   getUserLogged(userId: string) {
@@ -75,6 +73,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('auth-token');
     this.cookieService.delete('auth-token');
   }
 
