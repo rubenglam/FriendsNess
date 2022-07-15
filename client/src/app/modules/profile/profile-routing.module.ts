@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExercicesIndexPageComponent } from './pages/index/exercices-index-page.component';
-import { AuthGuard } from '../auth/guards/auth.guard';
+import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'index',
-        component: ExercicesIndexPageComponent,
+        path: '',
+        component: ProfileDetailsComponent,
       },
       {
         path: '**',
-        redirectTo: 'index',
+        redirectTo: '',
       },
     ],
   },
@@ -22,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ExercicesRoutingModule { }
+export class ProfileRoutingModule { }

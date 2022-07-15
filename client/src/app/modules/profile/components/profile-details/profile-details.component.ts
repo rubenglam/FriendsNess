@@ -3,11 +3,12 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { User } from '../../../../models/users/user.model';
 
 @Component({
-  selector: 'app-home-index-page',
-  templateUrl: './home-index-page.component.html',
-  styleUrls: ['./home-index-page.component.css'],
+  selector: 'app-profile-details',
+  templateUrl: './profile-details.component.html',
+  styles: [
+  ]
 })
-export class HomeIndexPageComponent implements OnInit {
+export class ProfileDetailsComponent implements OnInit {
   user: User;
 
   constructor(private authService: AuthService) { }
@@ -15,4 +16,5 @@ export class HomeIndexPageComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getUser;
   }
+
 }

@@ -33,6 +33,7 @@ const login = async (req = request, res = response) => {
 
 		// Devolver el token
 		return res.json({
+			user: dbUser,
 			token,
 		});
 	} catch (error) {

@@ -6,6 +6,7 @@ import {
 } from '../../../../models/exercices/exercice.model';
 import { Observable } from 'rxjs';
 import { ExercicesService } from '../../services/exercices.service';
+import { UserExercice } from 'src/app/models/exercices/user-exercice.model';
 
 @Component({
   selector: 'app-exercices-index-page',
@@ -13,7 +14,7 @@ import { ExercicesService } from '../../services/exercices.service';
   styleUrls: ['./exercices-index-page.component.css'],
 })
 export class ExercicesIndexPageComponent implements OnInit {
-  exercices: Exercice[];
+  myExercices: UserExercice[];
 
   exercicesBodyParts: string[];
   exercicesCategories: ExerciceCategory[];
@@ -25,14 +26,13 @@ export class ExercicesIndexPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getExercices();
+    this.getMyExercices();
   }
 
-  getExercices(exerciceName: string = '') {
-    console.log('getExercices');
-    this.exercicesService.getExercices().subscribe((data) => {
+  getMyExercices() {
+    this.exercicesService.getMyExercices().subscribe((data) => {
       console.log(data);
-      this.exercices = data.filter((x) => x.name.includes(exerciceName));
+      this.myExercices = data;
     });
   }
 }

@@ -6,8 +6,8 @@ import { of, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { RegisterRequest } from '../models/register-request.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { ApplicationUser } from '../../../models/users/application-user.model';
-import { CookieService } from 'ngx-cookie-service';
+import { User } from '../../../models/users/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +19,14 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService
-  ) {}
+    private router: Router
+  ) { }
 
   verifyAuthenticated(): Observable<boolean> {
-    // Si existe el token en los cookies, generamos un nuevo token. Si todo funciona correctamente el usuario esta autenticado
-    if (this.cookieService.get(this.AUTH_TOKEN)) {
-      return this.renewToken();
+    // Si existe el token en los cookies
+    const token = localStorage.getItem(this.AUTH_TOKEN);
+    if (token) {
+      return of(true);
     }
 
     // Como no existe ningún token, devolvemos que el usuario no esta autenticado
@@ -36,8 +37,8 @@ export class AuthService {
     const url = `${this.BASE_URL}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
       tap(response => {
-        this.cookieService.set(this.AUTH_TOKEN, response.token);
-        this.cookieService.set(this.AUTH_USER, response.user);
+        localStorage.setItem(this.AUTH_TOKEN, response.token);
+        localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
       }),
       catchError(responseError => of(responseError.error))
     );
@@ -47,15 +48,16 @@ export class AuthService {
     const url = `${this.BASE_URL}/auth/login`;
     return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
       tap(response => {
-        this.cookieService.set(this.AUTH_TOKEN, response.token);
-        this.cookieService.set(this.AUTH_USER, response.user);
+        console.log(response);
+        localStorage.setItem(this.AUTH_TOKEN, response.token);
+        localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
       }),
       catchError(errorResponse => errorResponse)
     );
   }
 
   renewToken(): Observable<boolean> {
-    const token = this.cookieService.get(this.AUTH_TOKEN) || '';
+    const token = localStorage.getItem(this.AUTH_TOKEN) || '';
 
     const url = `${this.BASE_URL}/auth/renewToken`;
     const headers = { Authorization: `Bearer ${token}` };
@@ -67,8 +69,8 @@ export class AuthService {
       .pipe(
         tap(response => {
           console.log(response);
-          this.cookieService.set(this.AUTH_TOKEN, response.token);
-          this.cookieService.set(this.AUTH_USER, response.user);
+          localStorage.setItem(this.AUTH_TOKEN, response.token);
+          localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
         }),
         map(() => true),
         catchError(error => {
@@ -79,15 +81,24 @@ export class AuthService {
   }
 
   logout() {
-    this.cookieService.delete(this.AUTH_TOKEN);
-    this.cookieService.delete(this.AUTH_USER);
+    localStorage.removeItem(this.AUTH_TOKEN);
+    localStorage.removeItem(this.AUTH_USER);
+    this.router.navigateByUrl("/");
+  }
+
+  getToken() {
+    return localStorage.getItem(this.AUTH_TOKEN);
   }
 
   get isAuthenticated(): boolean {
-    return this.cookieService.get(this.AUTH_TOKEN) != null;
+    return localStorage.getItem(this.AUTH_TOKEN) !== null;
   }
 
   get getUser(): any {
-    return this.cookieService.get(this.AUTH_USER);
+    const user = localStorage.getItem(this.AUTH_USER);
+    if (user !== null) {
+      return JSON.parse(user);
+    }
+    return null;
   }
 }

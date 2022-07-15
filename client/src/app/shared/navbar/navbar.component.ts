@@ -7,10 +7,14 @@ import { AuthService } from '../../modules/auth/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   get isLogged() {
     return this.authService.isAuthenticated;
+  }
+
+  get getUser() {
+    return this.authService.getUser;
   }
 
   logout() {

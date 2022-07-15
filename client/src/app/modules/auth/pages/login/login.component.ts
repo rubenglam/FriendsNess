@@ -10,26 +10,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginForm: FormGroup = this.formBuilder.group({
+  loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4)]],
+    rememberMe: [false, [Validators.required]]
   });
-  errorMessage: string;
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private authService: AuthService
-  ) {}
+  ) { }
 
   login() {
-    console.log('Login');
-    // Resetear variables
-    this.errorMessage = undefined;
+    const formValue = { ...this.loginForm.value };
     // Mapear los datos del formulario en un request
     const request: LoginRequest = {
-      username: this.loginForm.value.email,
-      password: this.loginForm.value.password,
+      username: formValue.email,
+      password: formValue.password,
     };
     // Enviar la petición de inició de sesión
     this.authService.login(request).subscribe(
@@ -38,7 +36,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/home');
       },
       error => {
-        this.errorMessage = error;
+        console.log(error);
       }
     );
   }

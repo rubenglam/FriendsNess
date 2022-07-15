@@ -4,10 +4,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [NavbarComponent, NotFoundComponent],
-  exports: [NavbarComponent, NotFoundComponent],
+  declarations: [NavbarComponent, NotFoundComponent, LoadingComponent],
+  exports: [NavbarComponent, NotFoundComponent, LoadingComponent],
   imports: [CommonModule, RouterModule],
 })
-export class SharedModule {}
+export class SharedModule { }

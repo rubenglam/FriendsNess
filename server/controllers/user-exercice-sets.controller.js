@@ -20,6 +20,8 @@ const getUserExerciceSetById = async (req, res = response) => {
 };
 
 const createUserExerciceSet = async (req = request, res = response) => {
+	console.log(req.body);
+	console.log(req.uid);
 	const uid = req.uid;
 	const userExerciceSet = new UserExerciceSet({
 		user: uid,

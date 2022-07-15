@@ -1,3 +1,12 @@
+# RUN
+
+ng serve
+
+# UTILS
+
+1. ng g m {name} --module
+2. ng g c {name} --skipTests -is
+
 # Friendsness
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.

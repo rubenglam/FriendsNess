@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
 import { WorkoutsModule } from './modules/workouts/workouts.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,9 +30,10 @@ import { WorkoutsModule } from './modules/workouts/workouts.module';
     FlexLayoutModule,
     FormsModule,
     AuthModule,
+    ProfileModule
   ],
   exports: [],
   providers: [CookieService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

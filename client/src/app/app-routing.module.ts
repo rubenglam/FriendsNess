@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExercicesIndexPageComponent } from './modules/exercices/pages/index/exercices-index-page.component';
 import { HomeIndexPageComponent } from './modules/home/pages/home-index-page/home-index-page.component';
-import { LoginComponent } from './modules/auth/pages/login/login.component';
-import { RegisterComponent } from './modules/auth/pages/register/register.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
@@ -33,6 +30,11 @@ const routes: Routes = [
       import('./modules/exercices/exercices.module').then(
         module => module.ExercicesModule
       ),
+  }, {
+    path: "profile",
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    loadChildren: () => import("./modules/profile/profile.module").then(module => module.ProfileModule)
   },
   { path: '**', pathMatch: 'full', component: NotFoundComponent },
 ];
@@ -42,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
