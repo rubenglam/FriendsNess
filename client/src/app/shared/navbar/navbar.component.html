@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100">
+<div class="navbar bg-white dark:bg-base-100">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -25,14 +25,24 @@
         <li><a routerLink="/workouts">Workouts</a></li>
       </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl" routerLink="/">Friendsness</a>
+    <a
+      class="btn btn-ghost normal-case text-xl text-black dark:text-white"
+      routerLink="/"
+      >Friendsness</a
+    >
   </div>
   <div class="navbar-center hidden lg:flex" *ngIf="isLogged">
     <ul class="menu menu-horizontal p-0">
       <li tabindex="0">
-        <a routerLink="/exercices" class="mr-2">Exercices</a>
+        <a routerLink="/exercices" class="mr-2 text-black dark:text-white"
+          >Exercices</a
+        >
       </li>
-      <li><a routerLink="/workouts">Routines</a></li>
+      <li>
+        <a routerLink="/workouts" class="text-black dark:text-white"
+          >Routines</a
+        >
+      </li>
     </ul>
   </div>
   <div class="navbar-end mx-3" *ngIf="!isLogged; else toolbarEndLogged">
@@ -43,7 +53,12 @@
 
 <ng-template #toolbarEndLogged>
   <div class="navbar-end mx-3">
-    <a class="mx-3" routerLink="/profile">{{ getUser.name | titlecase }}</a>
+    <a
+      class="mx-3 text-black dark:text-white font-medium"
+      routerLink="/profile"
+      >{{ getUser.name | titlecase }}</a
+    >
+    <a class="btn btn-sm mx-3" (click)="changeTheme()">Theme</a>
     <a class="btn btn-sm btn-primary ml-3" (click)="logout()">Logout</a>
   </div>
 </ng-template>

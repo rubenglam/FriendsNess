@@ -6,7 +6,7 @@ const getUserExercicesByUser = async (req = request, res = response) => {
 	const uid = req.uid;
 
 	try {
-		const userExercices = await UserExerciceSchema.find({ user: uid }).populate('userExerciceSet').populate('exercice');
+		const userExercices = await UserExerciceSchema.find({ user: uid }).populate('exercice').populate('user');
 
 		// Devolver los user exercices
 		return res.json({
@@ -40,12 +40,22 @@ const getUserExerciceById = async (req = request, res = response) => {
 
 const createUserExercice = async (req = request, res = response) => {
 	const uid = req.uid;
-	const userExercice = new UserExerciceSchema({
-		user: uid,
-		...req.body,
-	});
+	const { exerciceId } = req.body;
 
 	try {
+		const exists = await UserExerciceSchema.findOne({ exercice: exerciceId, user: uid });
+		console.log(exists);
+		if (exists) {
+			return res.status(404).json({
+				msg: 'Duplicated user exercice',
+			});
+		}
+
+		const userExercice = new UserExerciceSchema({
+			user: uid,
+			exercice: exerciceId,
+		});
+
 		const createdUserExercice = await userExercice.save();
 
 		// Devolver el user exercice creado

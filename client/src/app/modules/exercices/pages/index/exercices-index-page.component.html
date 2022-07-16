@@ -16,16 +16,15 @@
       <p class="text-md">No exercices added</p>
     </div>
     <div>
-      <div class="flex justify-between">
+      <div class="flex justify-between my-7">
         <div
-          class="card w-96 bg-base-100 shadow-xl"
-          *ngFor="let exercice of myExercices"
+          class="card border border-gray-500 dark:border-gray-700 w-96 bg-base-100"
+          *ngFor="let userExercice of myExercices"
         >
           <div class="card-body">
-            <h2 class="card-title">Card title!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <h2 class="card-title">{{ userExercice.exercice.name }}</h2>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary">Buy Now</button>
+              <button class="btn btn-sm btn-primary">Add Set</button>
             </div>
           </div>
         </div>
@@ -65,9 +64,6 @@
     <app-loading></app-loading>
   </div>
 </ng-template>
-
-<!-- The button to open modal -->
-<label for="my-modal-3" class="btn modal-button">open modal</label>
 
 <!-- Put this part before </body> tag -->
 <input type="checkbox" id="my-modal-3" class="modal-toggle" />

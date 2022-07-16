@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../modules/auth/services/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,8 @@ import { AuthService } from '../../modules/auth/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private themeService: ThemeService) { }
 
   get isLogged() {
     return this.authService.isAuthenticated;
@@ -19,5 +21,9 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  changeTheme() {
+    this.themeService.toggleTheme();
   }
 }

@@ -1,6 +1,6 @@
 module.exports = {
-  darkMode: 'class',
-  content: ['./src/**/*.{html,ts}'],
+  darkMode: "class",
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     // screens: {
     //   sm: '640px',
@@ -23,7 +23,7 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     styled: true,
-    themes: ["night"],
+    themes: ["light", "night"],
     base: true,
     utils: true,
     logs: true,

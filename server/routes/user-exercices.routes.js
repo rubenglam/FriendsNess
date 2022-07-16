@@ -15,7 +15,7 @@ router.get('', [validateJWT], getUserExercicesByUser);
 router.get('/:id', [validateJWT], getUserExerciceById);
 
 // POST: "/api/user-exercices"
-router.post('', [validateJWT], createUserExercice);
+router.post('', [validateJWT, check('exerciceId', 'Exercice id is required').isMongoId(), validateFields], createUserExercice);
 
 // PUT: "/api/user-exercices/{id}"
 router.put('/:id', [validateJWT], updateUserExercice);
