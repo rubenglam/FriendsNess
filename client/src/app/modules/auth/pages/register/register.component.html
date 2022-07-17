@@ -1,45 +1,42 @@
 <div class="max-w-2xl mx-auto flex justify-center items-center my-20">
   <div
-    class="bg-gray-700 shadow-md border border-gray-800 rounded-lg max-w-sm p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 w-full">
-    <!-- <div class="alert alert-error shadow-lg my-4" *ngIf="errorMessage !== undefined">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>{{ errorMessage }}</span>
-      </div>
-    </div> -->
-    <form class="space-y-6" [formGroup]="registerForm" (ngSubmit)="register()">
-      <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+    class="bg-gray-100 border border-gray-200 rounded-lg max-w-sm p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 w-full"
+  >
+    <form
+      class="space-y-6"
+      autocomplete="off"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <h3 class="text-xl text-center font-medium text-gray-900 dark:text-white">
         Register in to our platform
       </h3>
       <div>
         <label
-          for="username"
           class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
           >Your username</label
         >
         <input
           type="text"
-          name="username"
-          id="username"
           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          formControlName="username"
-          placeholder="phil"
-          required="" />
+          formControlName="userName"
+          placeholder="UserName"
+        />
+        <span class="text-red-500" *ngIf="fieldInvalid('userName')">
+          Invalid username
+        </span>
       </div>
       <div>
         <label
-          for="email"
           class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
           >Your email</label
         >
         <input
           type="text"
-          name="email"
-          id="email"
           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           formControlName="email"
-          placeholder="phil@gmail.com"
-          required="" />
+          placeholder="Email"
+        />
       </div>
       <div>
         <label
@@ -49,15 +46,34 @@
         >
         <input
           type="password"
-          name="password"
-          id="password"
-          placeholder="••••••••"
+          formControlName="password"
+          placeholder="Password"
           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          required="" />
+          required=""
+        />
+        <span class="text-red-500" *ngIf="fieldInvalid('password')">
+          6 characters required
+        </span>
+      </div>
+      <div>
+        <label
+          class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+          >Confirm password</label
+        >
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        />
+        <span class="text-red-500" *ngIf="fieldInvalid('confirmPassword')">
+          Passwords not matches
+        </span>
       </div>
       <button
         type="submit"
-        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
         Register
       </button>
       <div class="text-sm font-medium text-gray-500 dark:text-gray-300">

@@ -3,6 +3,7 @@ import { RegisterRequest } from '../../models/register-request.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ValidatorsService } from '../../../../services/validators.service';
 
 @Component({
   selector: 'app-register',
@@ -10,24 +11,49 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup = this.formBuilder.group({
-    userName: [''],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
-  });
+  form: FormGroup = this.fb.group(
+    {
+      userName: ['', [Validators.required, Validators.minLength(3)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorsService.EMAIL_PATTERN),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    },
+    {
+      validators: [
+        this.validatorsService.matchFields('password', 'confirmPassword'),
+      ],
+    }
+  );
   registerRequest = new RegisterRequest();
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private validatorsService: ValidatorsService,
     private authService: AuthService
   ) {}
 
-  register() {
-    this.authService.register(this.registerRequest).subscribe((success) => {
-      if (success) {
-        this.router.navigateByUrl('/login');
-      }
-    });
+  fieldInvalid(field: string) {
+    return this.form.get(field)?.invalid && this.form.get(field)?.touched;
+  }
+
+  submit() {
+    // Comprobar que todos los campos són correctos
+    this.form.markAllAsTouched();
+
+    // Si el formulario es válido, registra el usuario
+    if (this.form.valid) {
+      this.authService.register(this.registerRequest).subscribe((success) => {
+        if (success) {
+          this.router.navigateByUrl('/login');
+        }
+      });
+    }
   }
 }

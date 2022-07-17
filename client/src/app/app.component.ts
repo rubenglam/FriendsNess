@@ -9,10 +9,13 @@ import { ThemeService } from './services/theme.service';
 export class AppComponent implements OnInit {
   title = 'friendsness';
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    const theme = this.themeService.THEME_LIGHT;
+    let theme = this.themeService.getTheme();
+    if (theme === null) {
+      theme = this.themeService.THEME_LIGHT;
+    }
     this.themeService.setTheme(theme);
   }
 }

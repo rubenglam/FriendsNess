@@ -2,9 +2,9 @@
   class="container mx-auto"
   *ngIf="myExercices !== undefined; else loadingView"
 >
-  <div class="my-3">
+  <div class="my-5">
     <div class="flex justify-between">
-      <h1 class="text-3xl">My Exercices</h1>
+      <h1 class="text-3xl font-medium">My Exercices</h1>
       <div>
         <label for="my-modal-3" class="btn btn-sm modal-button btn-primary"
           >Add</label
@@ -18,10 +18,10 @@
     <div>
       <div class="flex justify-between my-7">
         <div
-          class="card border border-gray-500 dark:border-gray-700 w-96 bg-base-100"
+          class="card border border-gray-200 rounded-md dark:border-gray-700 w-96 bg-base-100"
           *ngFor="let userExercice of myExercices"
         >
-          <div class="card-body">
+          <div class="card-body p-5">
             <h2 class="card-title">{{ userExercice.exercice.name }}</h2>
             <div class="card-actions justify-end">
               <button class="btn btn-sm btn-primary">Add Set</button>
@@ -73,9 +73,5 @@
       >✕</label
     >
     <h3 class="text-lg font-bold">Add Exercice</h3>
-    <p class="py-4">
-      You've been selected for a chance to get one year of subscription to use
-      Wikipedia for free!
-    </p>
   </div>
 </div>

@@ -13,14 +13,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private AUTH_TOKEN = 'auth-token';
-  private AUTH_USER = 'auth-user';
-  private BASE_URL = environment.baseUrl;
+  private readonly AUTH_TOKEN = 'auth-token';
+  private readonly AUTH_USER = 'auth-user';
+  private readonly BASE_URL = environment.baseUrl;
 
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router
-  ) { }
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   verifyAuthenticated(): Observable<boolean> {
     // Si existe el token en los cookies
@@ -36,23 +33,23 @@ export class AuthService {
   register(registerRequest: RegisterRequest) {
     const url = `${this.BASE_URL}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
-      tap(response => {
+      tap((response) => {
         localStorage.setItem(this.AUTH_TOKEN, response.token);
         localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
       }),
-      catchError(responseError => of(responseError.error))
+      catchError((responseError) => of(responseError.error))
     );
   }
 
   login(loginRequest: LoginRequest) {
     const url = `${this.BASE_URL}/auth/login`;
     return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
-      tap(response => {
+      tap((response) => {
         console.log(response);
         localStorage.setItem(this.AUTH_TOKEN, response.token);
         localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
       }),
-      catchError(errorResponse => errorResponse)
+      catchError((errorResponse) => errorResponse)
     );
   }
 
@@ -67,13 +64,13 @@ export class AuthService {
         headers,
       })
       .pipe(
-        tap(response => {
+        tap((response) => {
           console.log(response);
           localStorage.setItem(this.AUTH_TOKEN, response.token);
           localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
         }),
         map(() => true),
-        catchError(error => {
+        catchError((error) => {
           console.log(error);
           return of(false);
         })
@@ -83,7 +80,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem(this.AUTH_TOKEN);
     localStorage.removeItem(this.AUTH_USER);
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl('/');
   }
 
   getToken() {

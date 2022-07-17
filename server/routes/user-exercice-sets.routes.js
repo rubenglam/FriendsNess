@@ -12,10 +12,10 @@ const router = Router();
 router.get('/:id', [validateJWT, validateRouteId], getUserExerciceSetById);
 
 // POST: "/api/user-exercice-sets"
-router.post('', validateJWT, createUserExerciceSet);
+router.post('', [validateJWT, validateFields], createUserExerciceSet);
 
 // PUT "/api/user-exercice-sets/{id}"
-router.put('/:id', [validateJWT, validateRouteId], updateUserExerciceSet);
+router.put('/:id', [validateJWT, validateRouteId, validateFields], updateUserExerciceSet);
 
 // DELETE: "/api/user-exercice-sets/{id}"
 router.delete('/:id', [validateJWT, validateRouteId], deleteUserExerciceSet);
