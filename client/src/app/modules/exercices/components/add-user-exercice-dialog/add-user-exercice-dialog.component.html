@@ -1,0 +1,11 @@
+<form class="space-y-6 my-6" autocomplete="off" [formGroup]="form">
+  <div class="grid gap-2 grid-cols-3">
+    <div
+      *ngFor="let exercice of exercices"
+      class="border border-gray-300 rounded-md p-3"
+      (click)="onExerciceClicked(exercice)"
+    >
+      {{ exercice.name }}
+    </div>
+  </div>
+</form>

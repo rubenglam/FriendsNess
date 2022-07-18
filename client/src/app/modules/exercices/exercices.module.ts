@@ -3,15 +3,17 @@ import { ExercicesIndexPageComponent } from './pages/index/exercices-index-page.
 import { CommonModule } from '@angular/common';
 import { ExerciceCardItemComponent } from './components/card-item/exercice-card-item.component';
 import { ExercicesSearchInputComponent } from './components/exercices-search-input/exercices-search-input.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExercicesRoutingModule } from './exercices-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { AddUserExerciceDialogComponent } from './components/add-user-exercice-dialog/add-user-exercice-dialog.component';
 
 @NgModule({
   declarations: [
     ExercicesIndexPageComponent,
     ExerciceCardItemComponent,
-    ExercicesSearchInputComponent
+    ExercicesSearchInputComponent,
+    AddUserExerciceDialogComponent
   ],
   exports: [
     ExercicesIndexPageComponent
@@ -19,6 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     SharedModule,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     ExercicesRoutingModule
   ]

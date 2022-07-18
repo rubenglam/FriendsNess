@@ -33,14 +33,27 @@ export class ExercicesService {
 
   getMyExercices(): Observable<UserExercice[]> {
     const url = `${this.BASE_URL}/user-exercices`;
-    const token = this.AuthService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
+    const headers = this.getHeaders();
 
     return this.httpClient
       .get<any>(url, { headers: headers })
       .pipe(map((response) => response!.userExercices));
+  }
+
+  createUserExercice(): Observable<UserExercice> {
+    const url = `${this.BASE_URL}/user-exercices`;
+    const headers = this.getHeaders();
+
+    return this.httpClient
+      .get<any>(url, { headers })
+      .pipe(map((response) => response!.userExercice));
+  }
+
+  getHeaders(): HttpHeaders {
+    const token = this.AuthService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
   }
 }
