@@ -16,7 +16,7 @@ export class ExercicesService {
   constructor(
     private httpClient: HttpClient,
     private AuthService: AuthService
-  ) { }
+  ) {}
 
   getExercices(): Observable<Exercice[]> {
     const url = `${this.BASE_URL}/exercices`;
@@ -40,12 +40,12 @@ export class ExercicesService {
       .pipe(map((response) => response!.userExercices));
   }
 
-  createUserExercice(): Observable<UserExercice> {
+  createUserExercice(userExercice: UserExercice): Observable<UserExercice> {
     const url = `${this.BASE_URL}/user-exercices`;
     const headers = this.getHeaders();
 
     return this.httpClient
-      .get<any>(url, { headers })
+      .post<any>(url, userExercice, { headers })
       .pipe(map((response) => response!.userExercice));
   }
 

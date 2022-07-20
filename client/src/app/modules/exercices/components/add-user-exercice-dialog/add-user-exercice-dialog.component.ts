@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ExercicesService } from '../../services/exercices.service';
 import { Exercice } from '../../../../models/exercices/exercice.model';
+import { UserExercice } from '../../../../models/exercices/user-exercice.model';
 
 @Component({
   selector: 'app-add-user-exercice-dialog',
@@ -24,8 +25,9 @@ export class AddUserExerciceDialogComponent implements OnInit {
   }
 
   onExerciceClicked(exercice: Exercice) {
-    this.exerciceService.createUserExercice({
-      exercice: exercice.id,
-    });
+    const userExercice: UserExercice = {
+      exercice,
+    };
+    this.exerciceService.createUserExercice(userExercice);
   }
 }

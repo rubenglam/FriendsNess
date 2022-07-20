@@ -40,7 +40,9 @@ const getUserExerciceById = async (req = request, res = response) => {
 
 const createUserExercice = async (req = request, res = response) => {
 	const uid = req.uid;
-	const { exerciceId } = req.body;
+	const { exercice } = req.body;
+
+	console.log(exercice);
 
 	try {
 		const exists = await UserExerciceSchema.findOne({ exercice: exerciceId, user: uid });
