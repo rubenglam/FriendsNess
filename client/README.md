@@ -6,6 +6,7 @@ ng serve
 
 1. ng g m {name} --module
 2. ng g c {name} --skipTests -is
+3. ng g m {name} --routing
 
 # Friendsness
 

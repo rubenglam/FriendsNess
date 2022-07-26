@@ -1,0 +1,44 @@
+<!-- UserExercices -->
+<div *ngIf="userExercices !== undefined; else loadingView">
+  <h1 class="text-3xl xs:my-3 font-medium xs:w-full">My Exercices</h1>
+
+  <!-- UserExercices Container -->
+  <div class="flex justify-between" *ngIf="userExercices.length > 0">
+    <!-- UserExercice Card -->
+    <div
+      class="border border-gray-200 rounded-lg dark:border-gray-700 w-full bg-base-100 group hover:bg-gray-700/20 cursor-pointer my-7"
+      *ngFor="let userExercice of userExercices"
+    >
+      <div class="p-5">
+        <div class="flex justify-between mb-4">
+          <span class="material-icons">fitness_center</span>
+          <div>
+            <span
+              class="rounded-full p-1 border dark:border-gray-500 text-gray-400 group-hover:bg-gray-700/20 font-semibold text-sm pl-2"
+            >
+              {{ userExercice.exercice.bodyPart }}
+            </span>
+            <span
+              class="rounded-full p-1 border dark:border-gray-500 text-gray-400 ml-2 group-hover:bg-gray-700/20 font-semibold text-sm px-2"
+            >
+              {{ userExercice.exercice.category }}
+            </span>
+          </div>
+        </div>
+        <h2 class="font-semibold">{{ userExercice.exercice.name }}</h2>
+        <div class="pt-3">Description</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No UserExercices Container -->
+  <div class="my-10 text-center" *ngIf="userExercices.length === 0">
+    <p class="text-md">No exercices added</p>
+  </div>
+</div>
+
+<ng-template #loadingView>
+  <div class="my-10">
+    <app-loading></app-loading>
+  </div>
+</ng-template>

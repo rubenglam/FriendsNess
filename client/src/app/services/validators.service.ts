@@ -12,9 +12,6 @@ export class ValidatorsService {
       const value1 = formGroup.get(field1)?.value;
       const value2 = formGroup.get(field2)?.value;
 
-      console.log(value1);
-      console.log(value2);
-
       if (value1 !== value2) {
         formGroup.get(field2)?.setErrors({
           match: false,
@@ -23,8 +20,6 @@ export class ValidatorsService {
           match: false,
         };
       }
-
-      console.log('match2');
 
       formGroup.get(field2)?.setErrors(null);
 

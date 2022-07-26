@@ -10,9 +10,17 @@ import { User } from '../../../../models/users/user.model';
 export class HomeIndexPageComponent implements OnInit {
   user: User;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUser;
+    if (this.authService.validateToken()) {
+      
+    } else {
+      this.authService.logoutToHome();
+    }
+  }
+
+  get isAuthenticated() {
+    return this.authService.validateToken();
   }
 }

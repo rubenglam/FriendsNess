@@ -1,62 +1,53 @@
 <div
-  class="container mx-auto"
-  *ngIf="myExercices !== undefined; else loadingView"
+  class="container mx-auto px-5"
+  *ngIf="exercices !== undefined; else loadingView"
 >
   <div class="my-5">
-    <div class="flex justify-between">
-      <h1 class="text-3xl font-medium">My Exercices</h1>
-      <div>
-        <label for="my-modal-3" class="btn btn-sm modal-button btn-primary"
-          >Add</label
-        >
-      </div>
+    <div class="flex justify-between xs:flex-wrap xs:text-center">
+      <h1 class="text-3xl xs:my-3 font-medium xs:w-full">Exercices</h1>
+      <form [formGroup]="searchForm">
+        <input
+          type="search"
+          formControlName="searchControl"
+          class="dark:bg-gray-800 rounded-lg xs:my-2 w-80 h-10 xs:w-full xs:mr-0 px-3"
+        />
+      </form>
     </div>
-
-    <div class="my-10 text-center" *ngIf="myExercices.length === 0">
-      <p class="text-md">No exercices added</p>
+    <div class="my-10 text-center" *ngIf="exercices.length === 0">
+      <p class="text-md">No exercices found</p>
     </div>
     <div>
-      <div class="grid gap-5 grid-cols-4 my-7">
+      <div
+        class="grid gap-5 grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 my-7"
+      >
+        <!-- Exercice Card -->
         <div
-          class="border border-gray-200 rounded-md dark:border-gray-700 w-full bg-base-100"
-          *ngFor="let userExercice of myExercices"
+          class="border border-gray-200 rounded-lg dark:border-gray-700 w-full bg-base-100 group hover:bg-gray-700/20 cursor-pointer"
+          *ngFor="let exercice of exercices"
         >
           <div class="p-5">
-            <h2 class="">{{ userExercice.exercice.name }}</h2>
-            <div class="card-actions justify-end">
-              <button class="btn btn-sm btn-primary">Add Set</button>
+            <div class="flex justify-between mb-4">
+              <span class="material-icons">fitness_center</span>
+              <div>
+                <span
+                  class="rounded-full p-1 border dark:border-gray-500 text-gray-400 group-hover:bg-gray-700/20 font-semibold text-sm pl-2"
+                >
+                  {{ exercice.bodyPart }}
+                </span>
+                <span
+                  class="rounded-full p-1 border dark:border-gray-500 text-gray-400 ml-2 group-hover:bg-gray-700/20 font-semibold text-sm px-2"
+                >
+                  {{ exercice.category }}
+                </span>
+              </div>
             </div>
+            <h2 class="font-semibold">{{ exercice.name }}</h2>
+            <div class="pt-3">Description</div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <div>
-    <div class="flex justify-between p-2 py-5">
-      <app-exercices-search-input (onEnter)="getExercices($event)"></app-exercices-search-input>
-      <div>
-        <select class="select bg-slate-700 rounded-md p-2 select-bordered mr-5 text-gray-300 h-full">
-          <option selected>All</option>
-          <option *ngFor="let exerciceBodyPart of exercicesBodyParts">
-            {{ exerciceBodyPart }}
-          </option>
-        </select>
-        <select class="select bg-slate-700 rounded-md p-2 select-bordered text-gray-300 h-full">
-          <option disabled selected>Who shot first?</option>
-          <option>Han Solo</option>
-          <option>Greedo</option>
-        </select>
-      </div>
-    </div>
-    <div class="flex justify-center flex-wrap" *ngIf="exercices.length > 0; else noDataView">
-      <div class="flex-auto p-2" *ngFor="let exercice of exercices">
-        <app-exercice-card-item [exercice]="exercice"></app-exercice-card-item>
-      </div>
-    </div>
-    <ng-template #noDataView>
-      <h4 class="text-center mt-10">No data found</h4>
-    </ng-template>
-  </div> -->
 </div>
 
 <ng-template #loadingView>
@@ -64,15 +55,3 @@
     <app-loading></app-loading>
   </div>
 </ng-template>
-
-<!-- Put this part before </body> tag -->
-<input type="checkbox" id="my-modal-3" class="modal-toggle" />
-<div class="modal">
-  <div class="modal-box relative max-w-5xl">
-    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2"
-      >✕</label
-    >
-    <h3 class="text-lg font-bold">Add Exercice</h3>
-    <app-add-user-exercice-dialog></app-add-user-exercice-dialog>
-  </div>
-</div>

@@ -19,17 +19,6 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  verifyAuthenticated(): Observable<boolean> {
-    // Si existe el token en los cookies
-    const token = localStorage.getItem(this.AUTH_TOKEN);
-    if (token) {
-      return of(true);
-    }
-
-    // Como no existe ningún token, devolvemos que el usuario no esta autenticado
-    return of(false);
-  }
-
   register(registerRequest: RegisterRequest) {
     const url = `${this.BASE_URL}/auth/register`;
     return this.httpClient.post<AuthResponse>(url, registerRequest).pipe(
@@ -45,7 +34,6 @@ export class AuthService {
     const url = `${this.BASE_URL}/auth/login`;
     return this.httpClient.post<AuthResponse>(url, loginRequest).pipe(
       tap((response) => {
-        console.log(response);
         localStorage.setItem(this.AUTH_TOKEN, response.token);
         localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
       }),
@@ -65,33 +53,51 @@ export class AuthService {
       })
       .pipe(
         tap((response) => {
-          console.log(response);
           localStorage.setItem(this.AUTH_TOKEN, response.token);
           localStorage.setItem(this.AUTH_USER, JSON.stringify(response.user));
         }),
         map(() => true),
         catchError((error) => {
-          console.log(error);
           return of(false);
         })
       );
   }
 
+  tokenExpired(token: string) {
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
+  }
+
   logout() {
     localStorage.removeItem(this.AUTH_TOKEN);
     localStorage.removeItem(this.AUTH_USER);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/auth/login');
+  }
+
+  logoutToHome() {
+    localStorage.removeItem(this.AUTH_TOKEN);
+    localStorage.removeItem(this.AUTH_USER);
+    this.router.navigateByUrl('');
   }
 
   getToken() {
     return localStorage.getItem(this.AUTH_TOKEN);
   }
 
-  get isAuthenticated(): boolean {
-    return localStorage.getItem(this.AUTH_TOKEN) !== null;
+  validateToken(): boolean {
+    const token = localStorage.getItem(this.AUTH_TOKEN);
+    if (!token) {
+      return false;
+    }
+
+    if (this.tokenExpired(token)) {
+      return false;
+    }
+
+    return true;
   }
 
-  get getUser(): any {
+  get getUser(): User {
     const user = localStorage.getItem(this.AUTH_USER);
     if (user !== null) {
       return JSON.parse(user);

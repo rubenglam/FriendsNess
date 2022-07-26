@@ -4,7 +4,7 @@ import { WorkoutsIndexPageComponent } from './pages/index/workouts-index-page.co
 import { WorkoutsCreatePageComponent } from './pages/create/workouts-create-page.component';
 import { WorkoutsUpdatePageComponent } from './pages/update/workouts-update-page.component';
 import { WorkoutsDetailsPageComponent } from './pages/details/workouts-details-page.component';
-import { AuthGuard } from '../auth/guards/auth.guard';
+import { AuthGuard } from '../../guards/auth.guard';
 
 const routes: Routes = [
   {

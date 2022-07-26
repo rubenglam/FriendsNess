@@ -8,11 +8,13 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService,
-    private themeService: ThemeService) { }
+  constructor(
+    private authService: AuthService,
+    private themeService: ThemeService
+  ) {}
 
   get isLogged() {
-    return this.authService.isAuthenticated;
+    return this.authService.validateToken();
   }
 
   get getUser() {
