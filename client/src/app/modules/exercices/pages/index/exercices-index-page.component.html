@@ -1,57 +1,51 @@
-<div
-  class="container mx-auto px-5"
-  *ngIf="exercices !== undefined; else loadingView"
->
-  <div class="my-5">
-    <div class="flex justify-between xs:flex-wrap xs:text-center">
-      <h1 class="text-3xl xs:my-3 font-medium xs:w-full">Exercices</h1>
-      <form [formGroup]="searchForm">
-        <input
-          type="search"
-          formControlName="searchControl"
-          class="dark:bg-gray-800 rounded-lg xs:my-2 w-80 h-10 xs:w-full xs:mr-0 px-3"
-        />
-      </form>
-    </div>
-    <div class="my-10 text-center" *ngIf="exercices.length === 0">
-      <p class="text-md">No exercices found</p>
-    </div>
-    <div>
-      <div
-        class="grid gap-5 grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 my-7"
-      >
-        <!-- Exercice Card -->
-        <div
-          class="border border-gray-200 rounded-lg dark:border-gray-700 w-full bg-base-100 group hover:bg-gray-700/20 cursor-pointer"
-          *ngFor="let exercice of exercices"
-        >
-          <div class="p-5">
-            <div class="flex justify-between mb-4">
-              <span class="material-icons">fitness_center</span>
-              <div>
-                <span
-                  class="rounded-full p-1 border dark:border-gray-500 text-gray-400 group-hover:bg-gray-700/20 font-semibold text-sm pl-2"
-                >
-                  {{ exercice.bodyPart }}
-                </span>
-                <span
-                  class="rounded-full p-1 border dark:border-gray-500 text-gray-400 ml-2 group-hover:bg-gray-700/20 font-semibold text-sm px-2"
-                >
-                  {{ exercice.category }}
-                </span>
-              </div>
-            </div>
-            <h2 class="font-semibold">{{ exercice.name }}</h2>
-            <div class="pt-3">Description</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Exercices -->
+<div *ngIf="exercices !== undefined; else loadingView">
+	<!-- Toolbar -->
+	<div class="flex justify-between xs:flex-wrap xs:text-center">
+		<h1 class="text-3xl xs:my-3 font-medium xs:w-full">Exercices</h1>
+		<form [formGroup]="searchForm">
+			<input type="search" formControlName="searchControl" class="dark:bg-gray-800 rounded-lg xs:my-2 w-80 h-9 xs:w-full xs:mr-0 px-3" />
+		</form>
+	</div>
+
+	<!-- Exercices Container -->
+	<div
+		class="grid gap-5 grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 my-7"
+		*ngIf="exercices.length > 0"
+	>
+		<!-- Exercice Card -->
+		<div
+			class="border border-gray-200 rounded-lg dark:border-gray-700 w-full bg-base-100 group hover:bg-gray-700/20 cursor-pointer"
+			*ngFor="let exercice of exercices"
+			(click)="onCardExerciceClicked(exercice.id)"
+		>
+			<div class="p-5">
+				<div class="flex justify-between mb-4">
+					<span class="material-icons">fitness_center</span>
+					<div>
+						<span class="rounded-full p-1 border dark:border-gray-500 text-gray-400 group-hover:bg-gray-700/20 font-semibold text-sm pl-2">
+							{{ exercice.bodyPart }}
+						</span>
+						<span
+							class="rounded-full p-1 border dark:border-gray-500 text-gray-400 ml-2 group-hover:bg-gray-700/20 font-semibold text-sm px-2"
+						>
+							{{ exercice.category }}
+						</span>
+					</div>
+				</div>
+				<h2 class="font-semibold">{{ exercice.name }}</h2>
+				<div class="pt-3">Description</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="my-10 text-center" *ngIf="exercices.length === 0">
+		<p class="text-md">No exercices found</p>
+	</div>
 </div>
 
 <ng-template #loadingView>
-  <div class="my-10">
-    <app-loading></app-loading>
-  </div>
+	<div class="my-10">
+		<app-loading></app-loading>
+	</div>
 </ng-template>

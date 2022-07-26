@@ -1,6 +1,6 @@
-<div class="container-xl" *ngIf="isAuthenticated; else unauthorizedView">
-  <app-home-authorized></app-home-authorized>
+<div *ngIf="isAuthenticated; else unauthorizedView">
+	<app-home-authorized></app-home-authorized>
 </div>
 <ng-template #unauthorizedView>
-  <app-home-unauthorized></app-home-unauthorized>
+	<app-home-unauthorized></app-home-unauthorized>
 </ng-template>

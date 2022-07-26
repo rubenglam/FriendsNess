@@ -8,52 +8,46 @@ import { AuthService } from '../../auth/services/auth.service';
 import { UserExercice } from 'src/app/models/exercices/user-exercice.model';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class ExercicesService {
-  private BASE_URL = environment.baseUrl;
+	private BASE_URL = environment.baseUrl;
 
-  constructor(
-    private httpClient: HttpClient,
-    private AuthService: AuthService
-  ) {}
+	constructor(private httpClient: HttpClient, private AuthService: AuthService) {}
 
-  getExercices(): Observable<Exercice[]> {
-    const url = `${this.BASE_URL}/exercices`;
-    const token = this.AuthService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
+	getExercice(exerciceId: number): Observable<Exercice> {
+		const url = `${this.BASE_URL}/exercices/${exerciceId}`;
+		const headers = this.getHeaders();
 
-    return this.httpClient
-      .get<any>(url, { headers: headers })
-      .pipe(map((response) => response!.exercices));
-  }
+		return this.httpClient.get<any>(url, { headers: headers }).pipe(map(response => response!.exercice));
+	}
 
-  getMyExercices(): Observable<UserExercice[]> {
-    const url = `${this.BASE_URL}/user-exercices`;
-    const headers = this.getHeaders();
+	getExercices(): Observable<Exercice[]> {
+		const url = `${this.BASE_URL}/exercices`;
+		const headers = this.getHeaders();
 
-    return this.httpClient
-      .get<any>(url, { headers: headers })
-      .pipe(map((response) => response!.userExercices));
-  }
+		return this.httpClient.get<any>(url, { headers: headers }).pipe(map(response => response!.exercices));
+	}
 
-  createUserExercice(userExercice: UserExercice): Observable<UserExercice> {
-    const url = `${this.BASE_URL}/user-exercices`;
-    const headers = this.getHeaders();
+	getMyExercices(): Observable<UserExercice[]> {
+		const url = `${this.BASE_URL}/user-exercices`;
+		const headers = this.getHeaders();
 
-    return this.httpClient
-      .post<any>(url, userExercice, { headers })
-      .pipe(map((response) => response!.userExercice));
-  }
+		return this.httpClient.get<any>(url, { headers: headers }).pipe(map(response => response!.userExercices));
+	}
 
-  getHeaders(): HttpHeaders {
-    const token = this.AuthService.getToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
-  }
+	createUserExercice(userExercice: UserExercice): Observable<UserExercice> {
+		const url = `${this.BASE_URL}/user-exercices`;
+		const headers = this.getHeaders();
+
+		return this.httpClient.post<any>(url, userExercice, { headers }).pipe(map(response => response!.userExercice));
+	}
+
+	getHeaders(): HttpHeaders {
+		const token = this.AuthService.getToken();
+		return new HttpHeaders({
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		});
+	}
 }
